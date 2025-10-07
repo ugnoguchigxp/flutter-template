@@ -1,0 +1,146 @@
+{
+  "app": {
+    "title": "Nimbus Control",
+    "subtitle": "マルチプラットフォームB2Bテンプレート"
+  },
+  "nav": {
+    "dashboard": "ダッシュボード",
+    "ui_demos": "UIデモ",
+    "api_demo": "APIデモ",
+    "account": "アカウント"
+  },
+  "dashboard": {
+    "title": "ダッシュボード",
+    "revenue_trend": "収益トレンド",
+    "pipeline": "パイプライン",
+    "kpi": "主要指標",
+    "sections": {
+      "quarterly_performance": {
+        "title": "四半期パフォーマンス",
+        "subtitle": "四半期ごとの収益成長を示す棒グラフ"
+      },
+      "market_share": {
+        "title": "市場シェア",
+        "subtitle": "顧客セグメントの構成"
+      },
+      "customer_engagement": {
+        "title": "顧客エンゲージメント",
+        "subtitle": "ユーザーアクティビティと継続率の散布図"
+      }
+    },
+    "pipeline_table": {
+      "stage": "ステージ",
+      "leads": "リード数",
+      "conversion": "コンバージョン"
+    },
+    "pipeline_stages": {
+      "new": "新規",
+      "qualified": "確度あり",
+      "proposal": "提案",
+      "negotiation": "交渉",
+      "closed_won": "受注確定"
+    },
+    "kpi_labels": {
+      "mrr": "MRR",
+      "churn": "解約率",
+      "active_seats": "アクティブシート",
+      "support_nps": "サポートNPS"
+    },
+    "quarters": {
+      "q1": "第1四半期",
+      "q2": "第2四半期",
+      "q3": "第3四半期",
+      "q4": "第4四半期"
+    },
+    "segments": {
+      "a": "セグメントA",
+      "b": "セグメントB",
+      "c": "セグメントC",
+      "d": "セグメントD"
+    }
+  },
+  "api_demo": {
+    "title": "API Wrapper デモ",
+    "subtitle": "React Query風のAPIラッパーとエラーハンドリングのデモ",
+    "request_settings": "リクエスト設定",
+    "method": "メソッド",
+    "endpoint": "エンドポイント",
+    "request_body": "リクエストBody (JSON)",
+    "request_body_hint": "{\"title\": \"foo\", \"body\": \"bar\", \"userId\": 1}",
+    "execute_request": "リクエスト実行",
+    "response": "レスポンス",
+    "clear": "クリア",
+    "test_endpoints": "テストエンドポイント",
+    "test_endpoints_subtitle": "JSONPlaceholder API (https://jsonplaceholder.typicode.com) を使用",
+    "get_post": "投稿を1件取得",
+    "get_users": "ユーザー一覧取得",
+    "create_post": "新規投稿作成",
+    "methods": {
+      "get": "GET",
+      "post": "POST",
+      "put": "PUT",
+      "delete": "DELETE"
+    }
+  },
+  "ui_demo": {
+    "title": "UIコンポーネントデモ",
+    "subtitle": "テンプレートに同梱された代表的なウィジェットの概要",
+    "sections": {
+      "data_table": {
+        "title": "DataTable2",
+        "subtitle": "数値列とチップを含む B2B 向けテーブルレイアウト"
+      },
+      "reactive_forms": {
+        "title": "リアクティブフォーム",
+        "subtitle": "バリデーションメッセージ付きで構成可能なフォームコントロール"
+      }
+    },
+    "form": {
+      "company_label": "会社名",
+      "email_label": "メールアドレス",
+      "seats_label": "席数",
+      "renewal_label": "更新日",
+      "select_date": "日付を選択",
+      "preview": "送信内容をプレビュー",
+      "payload_title": "フォームペイロード",
+      "default_company": "エグザンプル・システムズ",
+      "default_email": "contact@example.systems"
+    },
+    "pipeline_stages": {
+      "discovery": "発見",
+      "evaluation": "評価",
+      "legal": "法務",
+      "closed_won": "受注確定"
+    }
+  },
+  "languages": {
+    "english": "英語",
+    "japanese": "日本語"
+  },
+  "validation": {
+    "required": "必須項目です",
+    "email": "メールアドレスの形式が正しくありません"
+  },
+  "account": {
+    "title": "アカウント",
+    "settings": "設定",
+    "language": "言語",
+    "logout": "ログアウト",
+    "logout_confirm": "ログアウトしますか？"
+  },
+  "settings": {
+    "title": "設定",
+    "language": "言語設定",
+    "select_language": "言語を選択",
+    "save": "保存"
+  },
+  "common": {
+    "ok": "OK",
+    "cancel": "キャンセル",
+    "close": "閉じる",
+    "save": "保存",
+    "delete": "削除",
+    "edit": "編集",
+    "back": "戻る"
+  }
+}
