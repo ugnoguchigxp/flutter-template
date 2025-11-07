@@ -19,10 +19,10 @@ class AppShell extends HookConsumerWidget {
         route: DashboardRoute.path,
       ),
       _AppDestination(
-        label: context.tr('nav.ui_demos'),
-        icon: Icons.science_outlined,
-        activeIcon: Icons.science,
-        route: DemosRoute.path,
+        label: context.tr('nav.game'),
+        icon: Icons.games_outlined,
+        activeIcon: Icons.games,
+        route: GameRoute.path,
       ),
       _AppDestination(
         label: context.tr('nav.api_demo'),

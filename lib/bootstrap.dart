@@ -8,8 +8,6 @@ import 'package:flutter_template/src/core/config/app_config.dart';
 import 'package:flutter_template/src/core/logging/app_logger.dart';
 
 Future<void> bootstrap() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
   const apiBaseUrl = String.fromEnvironment(
     'API_BASE_URL',
     defaultValue: 'http://127.0.0.1:8081',
@@ -29,26 +27,28 @@ Future<void> bootstrap() async {
 
   final logger = container.read(appLoggerProvider);
 
-  FlutterError.onError = (details) {
-    logger.e(
-      'Uncaught Flutter error',
-      error: details.exception,
-      stackTrace: details.stack,
-    );
-  };
-
-  final platformDispatcher = WidgetsBinding.instance.platformDispatcher;
-  platformDispatcher.onError = (error, stackTrace) {
-    logger.e(
-      'Uncaught platform error',
-      error: error,
-      stackTrace: stackTrace,
-    );
-    return true;
-  };
-
   runZonedGuarded(
     () {
+      WidgetsFlutterBinding.ensureInitialized();
+
+      FlutterError.onError = (details) {
+        logger.e(
+          'Uncaught Flutter error',
+          error: details.exception,
+          stackTrace: details.stack,
+        );
+      };
+
+      final platformDispatcher = WidgetsBinding.instance.platformDispatcher;
+      platformDispatcher.onError = (error, stackTrace) {
+        logger.e(
+          'Uncaught platform error',
+          error: error,
+          stackTrace: stackTrace,
+        );
+        return true;
+      };
+
       runApp(
         UncontrolledProviderScope(container: container, child: const App()),
       );
