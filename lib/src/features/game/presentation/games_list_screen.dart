@@ -43,6 +43,13 @@ class GamesListScreen extends StatelessWidget {
                 color: Colors.orange,
                 onTap: () => context.go('/game/reflex'),
               ),
+              _GameCard(
+                title: 'オセロ',
+                description: 'CPUと対戦するオセロゲーム',
+                icon: Icons.grid_on,
+                color: Colors.green,
+                onTap: () => context.go('/game/othello'),
+              ),
             ],
           ),
         ),

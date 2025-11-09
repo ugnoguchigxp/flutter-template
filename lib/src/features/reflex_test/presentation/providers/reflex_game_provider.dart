@@ -73,9 +73,9 @@ class ReflexGameNotifier extends StateNotifier<ReflexGameState> {
       );
     }).toList();
 
-    // 画面外に出た棒を削除
+    // 画面外に出た棒を削除（フルスクリーン対応）
     final activeBars = updatedBars.where((bar) {
-      return bar.y < (_canvasSize?.height ?? 1000);
+      return bar.y < (_canvasSize?.height ?? 1000) + FallingBar.height;
     }).toList();
 
     state = state.copyWith(bars: activeBars);
@@ -121,13 +121,13 @@ class ReflexGameNotifier extends StateNotifier<ReflexGameState> {
     final random = Random();
     final screenWidth = _canvasSize!.width;
 
-    // 画面幅の10%〜90%の範囲でランダム生成
-    final x = screenWidth * (0.1 + random.nextDouble() * 0.8);
+    // 画面幅の5%〜95%の範囲でランダム生成（フルスクリーン対応）
+    final x = screenWidth * (0.05 + random.nextDouble() * 0.9);
 
     final bar = FallingBar(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       x: x,
-      y: 50.0, // 上部から開始
+      y: -FallingBar.height, // 画面上部外から開始
       velocity: 50.0, // 初期速度を少し設定してゆっくり開始
       spawnTime: DateTime.now(),
     );

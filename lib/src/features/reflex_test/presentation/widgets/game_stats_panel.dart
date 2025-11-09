@@ -5,7 +5,9 @@ import 'package:flutter_template/src/features/reflex_test/domain/models/reflex_g
 import 'package:flutter_template/src/features/reflex_test/presentation/providers/reflex_game_provider.dart';
 
 class GameStatsPanel extends ConsumerWidget {
-  const GameStatsPanel({super.key});
+  const GameStatsPanel({super.key, this.compact = false});
+
+  final bool compact;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -15,10 +17,42 @@ class GameStatsPanel extends ConsumerWidget {
       return const SizedBox.shrink();
     }
 
+    if (compact) {
+      // コンパクトモード：フルスクリーンゲーム用
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: BoxDecoration(
+          color: Colors.black.withOpacity(0.7),
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(12),
+            bottomRight: Radius.circular(12),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            // スコア
+            _buildCompactStat('スコア', '${gameState.score}', Colors.white),
+            
+            // 成功数
+            _buildCompactStat('成功', '${gameState.successCount}', Colors.blue.shade300),
+            
+            // 残り時間
+            _buildCompactStat(
+              '時間', 
+              '${gameState.remainingTime.toStringAsFixed(1)}s', 
+              gameState.remainingTime <= 5 ? Colors.red.shade300 : Colors.white,
+            ),
+          ],
+        ),
+      );
+    }
+
+    // 通常モード
     return Container(
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.all(16),
-      constraints: const BoxConstraints(minHeight: 120), // 最小高さを設定
+      constraints: const BoxConstraints(minHeight: 120),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
@@ -31,9 +65,8 @@ class GameStatsPanel extends ConsumerWidget {
         ],
       ),
       child: Column(
-        mainAxisSize: MainAxisSize.min, // 最小限のサイズを使用
+        mainAxisSize: MainAxisSize.min,
         children: [
-          // スコアと残り時間
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -129,6 +162,31 @@ class GameStatsPanel extends ConsumerWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildCompactStat(String label, String value, Color valueColor) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 12,
+            color: Colors.white70,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        const SizedBox(height: 2),
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: valueColor,
+          ),
+        ),
+      ],
     );
   }
 }

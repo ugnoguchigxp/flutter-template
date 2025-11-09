@@ -6,6 +6,7 @@ import '../../features/dashboard/presentation/dashboard_screen.dart';
 import '../../features/demos/presentation/api_demo_screen.dart';
 import '../../features/game/presentation/drag_speed_game_screen.dart';
 import '../../features/game/presentation/games_list_screen.dart';
+import '../../features/othello/presentation/othello_game_screen.dart';
 import '../../features/reflex_test/presentation/reflex_game_screen.dart';
 import '../../features/shared/widgets/app_shell.dart';
 import '../../features/tetris/presentation/tetris_game_screen.dart';
@@ -14,6 +15,15 @@ final appRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     initialLocation: DashboardRoute.path,
     routes: [
+      // Full-screen routes (outside shell)
+      GoRoute(
+        path: ReflexGameRoute.path,
+        name: ReflexGameRoute.name,
+        pageBuilder: (context, state) => const NoTransitionPage(
+          child: ReflexGameScreen(),
+        ),
+      ),
+      
       ShellRoute(
         builder: (context, state, child) => AppShell(child: child),
         routes: [
@@ -53,10 +63,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                 ),
               ),
               GoRoute(
-                path: 'reflex',
-                name: ReflexGameRoute.name,
+                path: 'othello',
+                name: OthelloGameRoute.name,
                 pageBuilder: (context, state) => const NoTransitionPage(
-                  child: ReflexGameScreen(),
+                  child: OthelloGameScreen(),
                 ),
               ),
             ],
@@ -102,6 +112,11 @@ class TetrisGameRoute {
 class ReflexGameRoute {
   static const name = 'reflex-game';
   static const path = '/game/reflex';
+}
+
+class OthelloGameRoute {
+  static const name = 'othello-game';
+  static const path = '/game/othello';
 }
 
 class ApiDemoRoute {

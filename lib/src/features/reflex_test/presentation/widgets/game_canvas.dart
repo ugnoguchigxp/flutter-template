@@ -87,11 +87,12 @@ class GameCanvasPainter extends CustomPainter {
   }
 
   void _drawGround(Canvas canvas, Size size) {
+    final groundHeight = 30.0; // 地面の高さを少し増やす
     final groundPaint = Paint()
       ..color = Colors.brown.shade300
       ..style = PaintingStyle.fill;
 
-    final groundRect = Rect.fromLTWH(0, size.height - 20, size.width, 20);
+    final groundRect = Rect.fromLTWH(0, size.height - groundHeight, size.width, groundHeight);
     canvas.drawRect(groundRect, groundPaint);
 
     // 地面のテクスチャ（簡単な線）
@@ -101,7 +102,7 @@ class GameCanvasPainter extends CustomPainter {
 
     for (double x = 0; x < size.width; x += 20) {
       canvas.drawLine(
-        Offset(x, size.height - 20),
+        Offset(x, size.height - groundHeight),
         Offset(x + 10, size.height),
         linePaint,
       );

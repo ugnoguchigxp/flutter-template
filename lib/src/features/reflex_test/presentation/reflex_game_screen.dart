@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import 'package:flutter_template/src/app/router/app_router.dart';
 import 'package:flutter_template/src/features/reflex_test/domain/models/difficulty.dart';
 import 'package:flutter_template/src/features/reflex_test/domain/models/game_result.dart';
 import 'package:flutter_template/src/features/reflex_test/domain/models/reflex_game_state.dart';
@@ -38,11 +40,11 @@ class _ReflexGameScreenState extends ConsumerState<ReflexGameScreen> {
         final difficulty = _pendingDifficulty!;
         _pendingDifficulty = null;
 
-        // 画面サイズを取得
+        // 画面サイズを取得（フルスクリーン対応）
         final size = MediaQuery.of(context).size;
         final canvasSize = Size(
-          size.width - 32, // マージンを引く
-          size.height - 200, // UI要素の分を引く
+          size.width, // 画面幅いっぱい
+          size.height, // 画面高さいっぱい
         );
         gameNotifier.startGame(difficulty, canvasSize);
       });
@@ -66,23 +68,25 @@ class _ReflexGameScreenState extends ConsumerState<ReflexGameScreen> {
                   onChangeDifficulty: gameNotifier.resetGame,
                   onBack: () {
                     gameNotifier.resetGame();
-                    Navigator.of(context).pop();
+                    context.go(GameRoute.path);
                   },
                 )
-              : Column(
+              : Stack(
                   children: [
-                    // ゲーム統計パネル
-                    const GameStatsPanel(),
-
-                    // ゲームキャンバス
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: GameCanvas(
-                          gameState: gameState,
-                          onTapDown: gameNotifier.onTapDown,
-                        ),
+                    // ゲームキャンバス（フルスクリーン）
+                    Positioned.fill(
+                      child: GameCanvas(
+                        gameState: gameState,
+                        onTapDown: gameNotifier.onTapDown,
                       ),
+                    ),
+                    
+                    // コンパクトなゲーム統計パネル（上部にオーバーレイ）
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      child: GameStatsPanel(compact: true),
                     ),
                   ],
                 ),

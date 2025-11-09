@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
+import 'package:flutter_template/src/app/router/app_router.dart';
 import 'package:flutter_template/src/features/reflex_test/domain/models/difficulty.dart';
 
 class StartScreen extends StatelessWidget {
@@ -20,7 +22,7 @@ class StartScreen extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => context.go(GameRoute.path),
         ),
       ),
       body: SafeArea(
