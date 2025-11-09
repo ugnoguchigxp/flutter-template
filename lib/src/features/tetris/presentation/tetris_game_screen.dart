@@ -47,8 +47,8 @@ class _TetrisGameScreenState extends ConsumerState<TetrisGameScreen> {
         child: gameState.status == TetrisGameStatus.idle
             ? _buildStartScreen(context, gameNotifier)
             : gameState.status == TetrisGameStatus.gameOver
-                ? _buildGameOverScreen(context, gameState, gameNotifier)
-                : _buildGameScreen(context, gameState, gameNotifier),
+            ? _buildGameOverScreen(context, gameState, gameNotifier)
+            : _buildGameScreen(context, gameState, gameNotifier),
       ),
     );
   }
@@ -206,10 +206,7 @@ class _TetrisGameScreenState extends ConsumerState<TetrisGameScreen> {
         children: [
           Text(
             label,
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey.shade400,
-            ),
+            style: TextStyle(fontSize: 14, color: Colors.grey.shade400),
           ),
           const SizedBox(height: 4),
           Text(
@@ -238,10 +235,7 @@ class _TetrisGameScreenState extends ConsumerState<TetrisGameScreen> {
         children: [
           Text(
             label,
-            style: TextStyle(
-              fontSize: 11,
-              color: Colors.grey.shade400,
-            ),
+            style: TextStyle(fontSize: 11, color: Colors.grey.shade400),
           ),
           const SizedBox(height: 2),
           Text(

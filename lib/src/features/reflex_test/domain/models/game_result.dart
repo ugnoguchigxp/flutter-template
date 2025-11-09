@@ -47,7 +47,7 @@ class GameResult with _$GameResult {
   int _calculateMaxPossibleBars() {
     // 15秒間の出現パターン:
     // 0-5秒: 2秒間隔 → 2.5個
-    // 5-10秒: 1秒間隔 → 5個  
+    // 5-10秒: 1秒間隔 → 5個
     // 10-15秒: 0.33秒間隔 → 15個
     // 合計: 約22.5個 → 切り捨てて22個
     return 22;

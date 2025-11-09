@@ -19,64 +19,56 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: ReflexGameRoute.path,
         name: ReflexGameRoute.name,
-        pageBuilder: (context, state) => const NoTransitionPage(
-          child: ReflexGameScreen(),
-        ),
+        pageBuilder: (context, state) =>
+            const NoTransitionPage(child: ReflexGameScreen()),
       ),
-      
+
       ShellRoute(
         builder: (context, state, child) => AppShell(child: child),
         routes: [
           GoRoute(
             path: DashboardRoute.path,
             name: DashboardRoute.name,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: DashboardScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: DashboardScreen()),
           ),
           GoRoute(
             path: AccountRoute.path,
             name: AccountRoute.name,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: AccountScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: AccountScreen()),
           ),
           GoRoute(
             path: GameRoute.path,
             name: GameRoute.name,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: GamesListScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: GamesListScreen()),
             routes: [
               GoRoute(
                 path: 'drag-speed',
                 name: DragSpeedGameRoute.name,
-                pageBuilder: (context, state) => const NoTransitionPage(
-                  child: DragSpeedGameScreen(),
-                ),
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: DragSpeedGameScreen()),
               ),
               GoRoute(
                 path: 'tetris',
                 name: TetrisGameRoute.name,
-                pageBuilder: (context, state) => const NoTransitionPage(
-                  child: TetrisGameScreen(),
-                ),
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: TetrisGameScreen()),
               ),
               GoRoute(
                 path: 'othello',
                 name: OthelloGameRoute.name,
-                pageBuilder: (context, state) => const NoTransitionPage(
-                  child: OthelloGameScreen(),
-                ),
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: OthelloGameScreen()),
               ),
             ],
           ),
           GoRoute(
             path: ApiDemoRoute.path,
             name: ApiDemoRoute.name,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: ApiDemoScreen(),
-            ),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: ApiDemoScreen()),
           ),
         ],
       ),

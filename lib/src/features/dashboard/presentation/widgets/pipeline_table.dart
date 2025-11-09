@@ -6,10 +6,7 @@ import 'package:flutter_template/src/core/i18n/app_localizations.dart';
 import '../../data/models/dashboard_models.dart';
 
 class PipelineTable extends StatelessWidget {
-  const PipelineTable({
-    super.key,
-    required this.stages,
-  });
+  const PipelineTable({super.key, required this.stages});
 
   final List<PipelineStage> stages;
 
@@ -43,7 +40,9 @@ class PipelineTable extends StatelessWidget {
               DataCell(Text('${stage.leads}')),
               DataCell(
                 Chip(
-                  label: Text('${(stage.conversionRate * 100).toStringAsFixed(1)}%'),
+                  label: Text(
+                    '${(stage.conversionRate * 100).toStringAsFixed(1)}%',
+                  ),
                   backgroundColor: theme.colorScheme.primaryContainer,
                   labelStyle: theme.textTheme.labelMedium?.copyWith(
                     color: theme.colorScheme.onPrimaryContainer,

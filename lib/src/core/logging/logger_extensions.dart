@@ -23,7 +23,9 @@ extension SecureLogger on Logger {
       if (_sensitiveKeys.any((sensitive) => key.contains(sensitive))) {
         masked[entry.key] = '******';
       } else if (entry.value is Map<String, dynamic>) {
-        masked[entry.key] = _maskSensitiveData(entry.value as Map<String, dynamic>);
+        masked[entry.key] = _maskSensitiveData(
+          entry.value as Map<String, dynamic>,
+        );
       } else if (entry.value is List) {
         masked[entry.key] = _maskList(entry.value as List);
       } else {
@@ -72,7 +74,12 @@ extension SecureLogger on Logger {
     }
   }
 
-  void secureError(String message, {Object? error, StackTrace? stackTrace, Map<String, dynamic>? data}) {
+  void secureError(
+    String message, {
+    Object? error,
+    StackTrace? stackTrace,
+    Map<String, dynamic>? data,
+  }) {
     if (data != null) {
       final masked = _maskSensitiveData(data);
       e('$message | $masked', error: error, stackTrace: stackTrace);

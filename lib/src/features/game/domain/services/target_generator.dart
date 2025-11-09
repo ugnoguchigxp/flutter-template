@@ -13,10 +13,7 @@ class TargetGenerator {
     required Size canvasSize,
     Position? previousTarget,
   }) {
-    final center = Position(
-      x: canvasSize.width / 2,
-      y: canvasSize.height / 2,
-    );
+    final center = Position(x: canvasSize.width / 2, y: canvasSize.height / 2);
 
     final radius = min(canvasSize.width, canvasSize.height) / 2 * 0.8;
 
@@ -32,7 +29,8 @@ class TargetGenerator {
   /// ランダムなターゲット位置を生成
   Position _generateRandomTarget(Position center, double maxRadius) {
     final angle = _random.nextDouble() * 2 * pi;
-    final distance = maxRadius * (0.7 + _random.nextDouble() * 0.25); // 70%〜95%（長距離移動）
+    final distance =
+        maxRadius * (0.7 + _random.nextDouble() * 0.25); // 70%〜95%（長距離移動）
 
     return Position(
       x: center.x + distance * cos(angle),
@@ -47,25 +45,26 @@ class TargetGenerator {
     Position previous,
   ) {
     const maxAttempts = 10;
-    
+
     for (int attempt = 0; attempt < maxAttempts; attempt++) {
       final angle = _random.nextDouble() * 2 * pi;
-      final distance = maxRadius * (0.6 + _random.nextDouble() * 0.35); // 60%〜95%
-      
+      final distance =
+          maxRadius * (0.6 + _random.nextDouble() * 0.35); // 60%〜95%
+
       final candidate = Position(
         x: center.x + distance * cos(angle),
         y: center.y + distance * sin(angle),
       );
-      
+
       // 前回位置からの距離を計算
       final distanceFromPrevious = previous.distanceTo(candidate);
       final minRequiredDistance = maxRadius * 0.8; // 80%以上離れている必要あり
-      
+
       if (distanceFromPrevious >= minRequiredDistance) {
         return candidate;
       }
     }
-    
+
     // 万が一見つからない場合は、従来の反対側ロジックを使用
     return _generateOppositeTarget(center, maxRadius, previous);
   }
@@ -80,7 +79,8 @@ class TargetGenerator {
     final prevAngle = previous.angleFrom(center);
 
     // 反対側の角度（180° + ランダム変動 -30°〜+30°）
-    final oppositeAngle = prevAngle + pi + (_random.nextDouble() - 0.5) * (pi / 3);
+    final oppositeAngle =
+        prevAngle + pi + (_random.nextDouble() - 0.5) * (pi / 3);
 
     // ランダムな距離（70%〜95%）長距離移動を要求
     final distance = maxRadius * (0.7 + _random.nextDouble() * 0.25);

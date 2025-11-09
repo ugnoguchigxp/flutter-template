@@ -64,10 +64,7 @@ class _GameCanvasState extends State<GameCanvas> {
 }
 
 class GamePainter extends CustomPainter {
-  const GamePainter({
-    required this.gameState,
-    this.localDragPosition,
-  });
+  const GamePainter({required this.gameState, this.localDragPosition});
 
   final GameState gameState;
   final Offset? localDragPosition;
@@ -139,7 +136,8 @@ class GamePainter extends CustomPainter {
 
   Path _createSpadePath(Offset center, double size) {
     // SVGパスデータ（viewBox: 0 0 40.679 40.679）
-    const svgPath = 'M34.592,20.101c1.006,1.808,2.146,3.854,1.892,7.08c-0.298,3.947-2.771,6.509-6.785,7.023 '
+    const svgPath =
+        'M34.592,20.101c1.006,1.808,2.146,3.854,1.892,7.08c-0.298,3.947-2.771,6.509-6.785,7.023 '
         'c-1.688,0.223-3.075,0.096-4.066-0.394c-0.666-0.326-1.243-0.768-1.76-1.26c0.55,2.049,1.516,3.729,2.46,5.371 '
         'c0.224,0.391,0.445,0.775,0.66,1.163c0.167,0.303,0.167,0.67-0.002,0.972c-0.169,0.303-0.48,0.496-0.826,0.512 '
         'c-1.631,0.076-3.376,0.11-5.496,0.11c-1.595,0-3.21-0.021-4.851-0.04l-1.082-0.013c-0.32-0.005-0.618-0.16-0.804-0.421 '

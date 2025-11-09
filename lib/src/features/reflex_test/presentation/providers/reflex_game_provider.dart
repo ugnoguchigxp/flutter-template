@@ -22,7 +22,7 @@ class ReflexGameNotifier extends StateNotifier<ReflexGameState> {
   /// ゲーム開始
   void startGame(ReflexDifficulty difficulty, Size canvasSize) {
     _canvasSize = canvasSize;
-    
+
     state = ReflexGameState(
       status: ReflexGameStatus.playing,
       difficulty: difficulty,
@@ -32,24 +32,25 @@ class ReflexGameNotifier extends StateNotifier<ReflexGameState> {
 
     // ゲームループ開始
     _startGameLoop();
-    
+
     // 棒の生成開始
     _startSpawning();
-    
+
     // ゲームタイマー開始（15秒）
     _startGameTimer();
   }
 
   /// ゲームループ開始
   void _startGameLoop() {
-    _gameLoopTimer = Timer.periodic(const Duration(milliseconds: 16), (_) { // 60FPS
+    _gameLoopTimer = Timer.periodic(const Duration(milliseconds: 16), (_) {
+      // 60FPS
       final now = DateTime.now();
       final deltaTime = state.lastFrameTime != null
           ? now.difference(state.lastFrameTime!).inMilliseconds / 1000.0
           : 0.0;
-      
+
       state = state.copyWith(lastFrameTime: now);
-      
+
       _updatePhysics(deltaTime);
       _checkAndUpdateSpawnInterval();
     });
@@ -67,10 +68,7 @@ class ReflexGameNotifier extends StateNotifier<ReflexGameState> {
       // 位置更新: y = y + v*t
       final newY = bar.y + newVelocity * deltaTime;
 
-      return bar.copyWith(
-        y: newY,
-        velocity: newVelocity,
-      );
+      return bar.copyWith(y: newY, velocity: newVelocity);
     }).toList();
 
     // 画面外に出た棒を削除（フルスクリーン対応）
@@ -117,7 +115,7 @@ class ReflexGameNotifier extends StateNotifier<ReflexGameState> {
   /// 棒を生成
   void _spawnBar() {
     if (_canvasSize == null) return;
-    
+
     final random = Random();
     final screenWidth = _canvasSize!.width;
 
@@ -132,9 +130,7 @@ class ReflexGameNotifier extends StateNotifier<ReflexGameState> {
       spawnTime: DateTime.now(),
     );
 
-    state = state.copyWith(
-      bars: [...state.bars, bar],
-    );
+    state = state.copyWith(bars: [...state.bars, bar]);
   }
 
   /// ゲームタイマー開始
@@ -142,9 +138,9 @@ class ReflexGameNotifier extends StateNotifier<ReflexGameState> {
     _gameTimer = Timer.periodic(const Duration(milliseconds: 100), (_) {
       final elapsed = state.elapsedSeconds;
       final remaining = (15.0 - elapsed).clamp(0.0, 15.0);
-      
+
       state = state.copyWith(remainingTime: remaining);
-      
+
       if (remaining <= 0) {
         _endGame();
       }
@@ -154,7 +150,7 @@ class ReflexGameNotifier extends StateNotifier<ReflexGameState> {
   /// タップ処理
   void onTapDown(TapDownDetails details) {
     if (state.status != ReflexGameStatus.playing) return;
-    
+
     final tapPosition = details.localPosition;
 
     // タップ位置と棒の当たり判定
@@ -195,9 +191,7 @@ class ReflexGameNotifier extends StateNotifier<ReflexGameState> {
     _spawnTimer?.cancel();
     _gameTimer?.cancel();
 
-    state = state.copyWith(
-      status: ReflexGameStatus.gameOver,
-    );
+    state = state.copyWith(status: ReflexGameStatus.gameOver);
   }
 
   /// ゲームリセット
@@ -220,6 +214,7 @@ class ReflexGameNotifier extends StateNotifier<ReflexGameState> {
   }
 }
 
-final reflexGameProvider = StateNotifierProvider<ReflexGameNotifier, ReflexGameState>((ref) {
-  return ReflexGameNotifier();
-});
+final reflexGameProvider =
+    StateNotifierProvider<ReflexGameNotifier, ReflexGameState>((ref) {
+      return ReflexGameNotifier();
+    });

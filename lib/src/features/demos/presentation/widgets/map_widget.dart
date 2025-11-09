@@ -33,33 +33,30 @@ class _GoogleMapView extends HookWidget {
   Widget build(BuildContext context) {
     final markers = useState<Set<google.Marker>>({});
 
-    useEffect(
-      () {
-        markers.value = {
-          google.Marker(
-            markerId: const google.MarkerId('tokyo_station'),
-            position: google.LatLng(
-              initialPosition.latitude,
-              initialPosition.longitude,
-            ),
-            infoWindow: const google.InfoWindow(
-              title: 'Tokyo Station',
-              snippet: 'Main railway station',
-            ),
+    useEffect(() {
+      markers.value = {
+        google.Marker(
+          markerId: const google.MarkerId('tokyo_station'),
+          position: google.LatLng(
+            initialPosition.latitude,
+            initialPosition.longitude,
           ),
-          google.Marker(
-            markerId: const google.MarkerId('tokyo_tower'),
-            position: const google.LatLng(35.6586, 139.7454),
-            infoWindow: const google.InfoWindow(
-              title: 'Tokyo Tower',
-              snippet: 'Iconic landmark',
-            ),
+          infoWindow: const google.InfoWindow(
+            title: 'Tokyo Station',
+            snippet: 'Main railway station',
           ),
-        };
-        return null;
-      },
-      const [],
-    );
+        ),
+        google.Marker(
+          markerId: const google.MarkerId('tokyo_tower'),
+          position: const google.LatLng(35.6586, 139.7454),
+          infoWindow: const google.InfoWindow(
+            title: 'Tokyo Tower',
+            snippet: 'Iconic landmark',
+          ),
+        ),
+      };
+      return null;
+    }, const []);
 
     return google.GoogleMap(
       initialCameraPosition: google.CameraPosition(
@@ -86,33 +83,30 @@ class _AppleMapView extends HookWidget {
   Widget build(BuildContext context) {
     final annotations = useState<Set<apple.Annotation>>({});
 
-    useEffect(
-      () {
-        annotations.value = {
-          apple.Annotation(
-            annotationId: apple.AnnotationId('tokyo_station'),
-            position: apple.LatLng(
-              initialPosition.latitude,
-              initialPosition.longitude,
-            ),
-            infoWindow: apple.InfoWindow(
-              title: 'Tokyo Station',
-              snippet: 'Main railway station',
-            ),
+    useEffect(() {
+      annotations.value = {
+        apple.Annotation(
+          annotationId: apple.AnnotationId('tokyo_station'),
+          position: apple.LatLng(
+            initialPosition.latitude,
+            initialPosition.longitude,
           ),
-          apple.Annotation(
-            annotationId: apple.AnnotationId('tokyo_tower'),
-            position: apple.LatLng(35.6586, 139.7454),
-            infoWindow: apple.InfoWindow(
-              title: 'Tokyo Tower',
-              snippet: 'Iconic landmark',
-            ),
+          infoWindow: apple.InfoWindow(
+            title: 'Tokyo Station',
+            snippet: 'Main railway station',
           ),
-        };
-        return null;
-      },
-      const [],
-    );
+        ),
+        apple.Annotation(
+          annotationId: apple.AnnotationId('tokyo_tower'),
+          position: apple.LatLng(35.6586, 139.7454),
+          infoWindow: apple.InfoWindow(
+            title: 'Tokyo Tower',
+            snippet: 'Iconic landmark',
+          ),
+        ),
+      };
+      return null;
+    }, const []);
 
     return apple.AppleMap(
       initialCameraPosition: apple.CameraPosition(

@@ -49,10 +49,7 @@ void main() {
         final result = await repository.fetchRevenueTrend();
 
         for (var i = 1; i < result.length; i++) {
-          expect(
-            result[i].date.isAfter(result[i - 1].date),
-            isTrue,
-          );
+          expect(result[i].date.isAfter(result[i - 1].date), isTrue);
         }
       });
 

@@ -12,10 +12,7 @@ void main() {
     });
 
     test('fromJson creates valid RevenuePoint', () {
-      final json = {
-        'date': '2024-01-01T00:00:00.000',
-        'revenue': 150000.5,
-      };
+      final json = {'date': '2024-01-01T00:00:00.000', 'revenue': 150000.5};
 
       final revenuePoint = RevenuePoint.fromJson(json);
 
@@ -71,11 +68,7 @@ void main() {
     });
 
     test('fromJson creates valid PipelineStage', () {
-      final json = {
-        'stage': 'Proposal',
-        'leads': 60,
-        'conversionRate': 0.32,
-      };
+      final json = {'stage': 'Proposal', 'leads': 60, 'conversionRate': 0.32};
 
       final stage = PipelineStage.fromJson(json);
 
@@ -133,10 +126,7 @@ void main() {
 
   group('KpiMetric', () {
     test('creates instance with required fields', () {
-      const kpi = KpiMetric(
-        label: 'MRR',
-        value: '\$132k',
-      );
+      const kpi = KpiMetric(label: 'MRR', value: '\$132k');
 
       expect(kpi.label, 'MRR');
       expect(kpi.value, '\$132k');
@@ -217,10 +207,7 @@ void main() {
     });
 
     test('handles null optional fields in JSON', () {
-      final json = {
-        'label': 'Test',
-        'value': '100',
-      };
+      final json = {'label': 'Test', 'value': '100'};
 
       final kpi = KpiMetric.fromJson(json);
 

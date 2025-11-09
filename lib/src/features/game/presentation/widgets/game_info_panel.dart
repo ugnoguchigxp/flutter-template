@@ -19,8 +19,9 @@ class GameInfoPanel extends HookConsumerWidget {
     // 経過時間を更新
     useEffect(() {
       Timer? timer;
-      
-      if (gameState.status == GameStatus.playing && gameState.trialStartTime != null) {
+
+      if (gameState.status == GameStatus.playing &&
+          gameState.trialStartTime != null) {
         timer = Timer.periodic(const Duration(milliseconds: 50), (_) {
           final now = DateTime.now();
           final duration = now.difference(gameState.trialStartTime!);
@@ -89,10 +90,7 @@ class GameInfoPanel extends HookConsumerWidget {
               child: gameState.results.isNotEmpty
                   ? Text(
                       'Last: ${gameState.results.last.timeInSeconds.toStringAsFixed(3)}s',
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey,
-                      ),
+                      style: const TextStyle(fontSize: 14, color: Colors.grey),
                     )
                   : const SizedBox.shrink(),
             ),

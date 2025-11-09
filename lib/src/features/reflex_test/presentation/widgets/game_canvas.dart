@@ -36,12 +36,12 @@ class GameCanvasPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     // 背景を描画
     _drawBackground(canvas, size);
-    
+
     // 各棒を描画
     for (final bar in bars) {
       _drawBar(canvas, bar);
     }
-    
+
     // 地面を描画
     _drawGround(canvas, size);
   }
@@ -50,7 +50,7 @@ class GameCanvasPainter extends CustomPainter {
     final paint = Paint()
       ..color = Colors.grey.shade100
       ..style = PaintingStyle.fill;
-    
+
     canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), paint);
   }
 
@@ -72,10 +72,7 @@ class GameCanvasPainter extends CustomPainter {
       ..color = Colors.black.withOpacity(0.3)
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4);
 
-    canvas.drawRRect(
-      rect.shift(const Offset(2, 2)),
-      shadowPaint,
-    );
+    canvas.drawRRect(rect.shift(const Offset(2, 2)), shadowPaint);
 
     // 枠線
     final borderPaint = Paint()
@@ -92,7 +89,12 @@ class GameCanvasPainter extends CustomPainter {
       ..color = Colors.brown.shade300
       ..style = PaintingStyle.fill;
 
-    final groundRect = Rect.fromLTWH(0, size.height - groundHeight, size.width, groundHeight);
+    final groundRect = Rect.fromLTWH(
+      0,
+      size.height - groundHeight,
+      size.width,
+      groundHeight,
+    );
     canvas.drawRect(groundRect, groundPaint);
 
     // 地面のテクスチャ（簡単な線）

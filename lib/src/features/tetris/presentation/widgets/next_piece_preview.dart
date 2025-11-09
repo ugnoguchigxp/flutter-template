@@ -86,10 +86,7 @@ class NextPiecePainter extends CustomPainter {
           ..style = PaintingStyle.stroke
           ..strokeWidth = 1.5;
 
-        canvas.drawRect(
-          rect.deflate(0.5),
-          highlightPaint,
-        );
+        canvas.drawRect(rect.deflate(0.5), highlightPaint);
 
         // 影
         final shadowPaint = Paint()

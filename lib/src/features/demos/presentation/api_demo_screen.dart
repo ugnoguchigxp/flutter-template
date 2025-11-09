@@ -51,8 +51,8 @@ class ApiDemoScreen extends HookConsumerWidget {
       // Add error_scenario query parameter if not 'none'
       final endpointWithParams = errorScenario != 'none'
           ? endpoint.contains('?')
-              ? '$endpoint&error_scenario=$errorScenario'
-              : '$endpoint?error_scenario=$errorScenario'
+                ? '$endpoint&error_scenario=$errorScenario'
+                : '$endpoint?error_scenario=$errorScenario'
           : endpoint;
 
       ApiResult<Map<String, dynamic>> result;
@@ -101,7 +101,8 @@ class ApiDemoScreen extends HookConsumerWidget {
           responseState.value = 'Success:\n\n$formatted';
         },
         failure: (error) {
-          responseState.value = 'Error [${error.code}]:\n\n'
+          responseState.value =
+              'Error [${error.code}]:\n\n'
               'Message: ${error.message}\n'
               'User Message: ${error.userMessage}\n\n'
               'Details: ${error.details}';
@@ -185,7 +186,8 @@ class ApiDemoScreen extends HookConsumerWidget {
                       formControlName: 'errorScenario',
                       decoration: const InputDecoration(
                         labelText: 'Error Scenario',
-                        helperText: 'Select error scenario to test error handling',
+                        helperText:
+                            'Select error scenario to test error handling',
                       ),
                       items: const [
                         DropdownMenuItem(
@@ -380,10 +382,7 @@ class _EndpointExample extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 12),
-            Text(
-              description,
-              style: theme.textTheme.bodySmall,
-            ),
+            Text(description, style: theme.textTheme.bodySmall),
           ],
         ),
       ),

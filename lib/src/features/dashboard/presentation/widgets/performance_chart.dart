@@ -5,10 +5,7 @@ import 'package:intl/intl.dart';
 import '../../data/models/dashboard_models.dart';
 
 class PerformanceChart extends StatelessWidget {
-  const PerformanceChart({
-    super.key,
-    required this.series,
-  });
+  const PerformanceChart({super.key, required this.series});
 
   final List<RevenuePoint> series;
 
@@ -50,15 +47,10 @@ class PerformanceChart extends StatelessWidget {
           ),
           AreaMark(
             shape: ShapeEncode(value: BasicAreaShape(smooth: true)),
-            color: ColorEncode(
-              value: color.withValues(alpha: 0.12),
-            ),
+            color: ColorEncode(value: color.withValues(alpha: 0.12)),
           ),
         ],
-        axes: [
-          Defaults.horizontalAxis,
-          Defaults.verticalAxis,
-        ],
+        axes: [Defaults.horizontalAxis, Defaults.verticalAxis],
       ),
     );
   }

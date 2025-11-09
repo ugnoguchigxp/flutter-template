@@ -4,10 +4,7 @@ import '../../domain/models/tetris_game_state.dart';
 import '../providers/tetris_game_provider.dart';
 
 class TetrisBoard extends StatelessWidget {
-  const TetrisBoard({
-    required this.gameState,
-    super.key,
-  });
+  const TetrisBoard({required this.gameState, super.key});
 
   final TetrisGameState gameState;
 
@@ -61,8 +58,10 @@ class TetrisBoardPainter extends CustomPainter {
           final boardX = tetromino.position.x + x;
           final boardY = tetromino.position.y + y;
 
-          if (boardY >= 0 && boardY < boardHeight &&
-              boardX >= 0 && boardX < boardWidth) {
+          if (boardY >= 0 &&
+              boardY < boardHeight &&
+              boardX >= 0 &&
+              boardX < boardWidth) {
             _drawCell(
               canvas,
               boardX,
@@ -104,10 +103,7 @@ class TetrisBoardPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.0;
 
-    canvas.drawRect(
-      rect.deflate(1),
-      highlightPaint,
-    );
+    canvas.drawRect(rect.deflate(1), highlightPaint);
 
     // 影
     final shadowPaint = Paint()

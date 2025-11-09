@@ -9,11 +9,9 @@ import 'dio_client.dart';
 
 /// React Query-like API wrapper with automatic error handling
 class ApiWrapper {
-  ApiWrapper({
-    required Dio dio,
-    required Logger logger,
-  })  : _dio = dio,
-        _logger = logger;
+  ApiWrapper({required Dio dio, required Logger logger})
+    : _dio = dio,
+      _logger = logger;
 
   final Dio _dio;
   final Logger _logger;
@@ -39,11 +37,7 @@ class ApiWrapper {
       return ApiResult.success(data);
     } on DioException catch (e, stack) {
       final error = ApiError.fromDioException(e);
-      _logger.secureError(
-        'API GET failed: $path',
-        error: e,
-        stackTrace: stack,
-      );
+      _logger.secureError('API GET failed: $path', error: e, stackTrace: stack);
       return ApiResult.failure(error);
     } catch (e, stack) {
       final error = ApiError(
@@ -72,7 +66,9 @@ class ApiWrapper {
 
       final response = await _dio.post<Object>(path, data: data);
 
-      final result = parser != null ? parser(response.data) : response.data as T;
+      final result = parser != null
+          ? parser(response.data)
+          : response.data as T;
 
       _logger.secureInfo('API POST success: $path');
       return ApiResult.success(result);
@@ -111,17 +107,15 @@ class ApiWrapper {
 
       final response = await _dio.put<Object>(path, data: data);
 
-      final result = parser != null ? parser(response.data) : response.data as T;
+      final result = parser != null
+          ? parser(response.data)
+          : response.data as T;
 
       _logger.secureInfo('API PUT success: $path');
       return ApiResult.success(result);
     } on DioException catch (e, stack) {
       final error = ApiError.fromDioException(e);
-      _logger.secureError(
-        'API PUT failed: $path',
-        error: e,
-        stackTrace: stack,
-      );
+      _logger.secureError('API PUT failed: $path', error: e, stackTrace: stack);
       return ApiResult.failure(error);
     } catch (e, stack) {
       final error = ApiError(
@@ -149,7 +143,9 @@ class ApiWrapper {
 
       final response = await _dio.delete<Object>(path);
 
-      final result = parser != null ? parser(response.data) : response.data as T;
+      final result = parser != null
+          ? parser(response.data)
+          : response.data as T;
 
       _logger.secureInfo('API DELETE success: $path');
       return ApiResult.success(result);

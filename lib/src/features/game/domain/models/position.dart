@@ -6,10 +6,7 @@ part 'position.freezed.dart';
 
 @freezed
 class Position with _$Position {
-  const factory Position({
-    required double x,
-    required double y,
-  }) = _Position;
+  const factory Position({required double x, required double y}) = _Position;
 
   const Position._();
 

@@ -8,11 +8,11 @@ import 'trial_result.dart';
 part 'game_state.freezed.dart';
 
 enum GameStatus {
-  idle,           // 初期状態
-  ready,          // 開始準備
-  playing,        // トライアル進行中
-  trialComplete,  // 1トライアル完了
-  gameComplete,   // 全トライアル完了
+  idle, // 初期状態
+  ready, // 開始準備
+  playing, // トライアル進行中
+  trialComplete, // 1トライアル完了
+  gameComplete, // 全トライアル完了
 }
 
 @freezed

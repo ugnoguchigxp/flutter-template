@@ -18,7 +18,10 @@ class AccountScreen extends HookConsumerWidget {
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
       children: [
-        Text(context.tr('account.title'), style: theme.textTheme.headlineMedium),
+        Text(
+          context.tr('account.title'),
+          style: theme.textTheme.headlineMedium,
+        ),
         const SizedBox(height: 32),
         Card(
           child: Column(
@@ -50,11 +53,13 @@ class AccountScreen extends HookConsumerWidget {
                 subtitle: const Text('Scan QR codes and barcodes'),
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () {
-                  unawaited(Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => const BarcodeScannerScreen(),
+                  unawaited(
+                    Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => const BarcodeScannerScreen(),
+                      ),
                     ),
-                  ));
+                  );
                 },
               ),
             ],
@@ -80,74 +85,78 @@ class AccountScreen extends HookConsumerWidget {
   void _showLanguageDialog(BuildContext context, WidgetRef ref) {
     final currentLocale = ref.read(localeProvider);
 
-    unawaited(showDialog<void>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(context.tr('settings.select_language')),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            RadioListTile<String>(
-              title: Text(context.tr('languages.japanese')),
-              value: 'ja',
-              groupValue: currentLocale.languageCode,
-              onChanged: (value) {
-                if (value != null) {
-                  ref.read(localeProvider.notifier).setLocale(Locale(value));
-                  Navigator.of(context).pop();
-                }
-              },
-            ),
-            RadioListTile<String>(
-              title: Text(context.tr('languages.english')),
-              value: 'en',
-              groupValue: currentLocale.languageCode,
-              onChanged: (value) {
-                if (value != null) {
-                  ref.read(localeProvider.notifier).setLocale(Locale(value));
-                  Navigator.of(context).pop();
-                }
-              },
+    unawaited(
+      showDialog<void>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(context.tr('settings.select_language')),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              RadioListTile<String>(
+                title: Text(context.tr('languages.japanese')),
+                value: 'ja',
+                groupValue: currentLocale.languageCode,
+                onChanged: (value) {
+                  if (value != null) {
+                    ref.read(localeProvider.notifier).setLocale(Locale(value));
+                    Navigator.of(context).pop();
+                  }
+                },
+              ),
+              RadioListTile<String>(
+                title: Text(context.tr('languages.english')),
+                value: 'en',
+                groupValue: currentLocale.languageCode,
+                onChanged: (value) {
+                  if (value != null) {
+                    ref.read(localeProvider.notifier).setLocale(Locale(value));
+                    Navigator.of(context).pop();
+                  }
+                },
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(context.tr('common.close')),
             ),
           ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text(context.tr('common.close')),
-          ),
-        ],
       ),
-    ));
+    );
   }
 
   void _showLogoutDialog(BuildContext context, WidgetRef ref) {
-    unawaited(showDialog<void>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(context.tr('account.logout')),
-        content: Text(context.tr('account.logout_confirm')),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text(context.tr('common.cancel')),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              // TODO: Implement logout logic
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(context.tr('account.logout'))),
-              );
-            },
-            child: Text(
-              context.tr('common.ok'),
-              style: const TextStyle(color: Colors.red),
+    unawaited(
+      showDialog<void>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(context.tr('account.logout')),
+          content: Text(context.tr('account.logout_confirm')),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(context.tr('common.cancel')),
             ),
-          ),
-        ],
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                // TODO: Implement logout logic
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(context.tr('account.logout'))),
+                );
+              },
+              child: Text(
+                context.tr('common.ok'),
+                style: const TextStyle(color: Colors.red),
+              ),
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }
 

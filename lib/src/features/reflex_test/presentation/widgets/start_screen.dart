@@ -5,10 +5,7 @@ import 'package:flutter_template/src/app/router/app_router.dart';
 import 'package:flutter_template/src/features/reflex_test/domain/models/difficulty.dart';
 
 class StartScreen extends StatelessWidget {
-  const StartScreen({
-    required this.onStart,
-    super.key,
-  });
+  const StartScreen({required this.onStart, super.key});
 
   final void Function(ReflexDifficulty) onStart;
 
@@ -42,11 +39,7 @@ class StartScreen extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    const Icon(
-                      Icons.speed,
-                      size: 48,
-                      color: Colors.blue,
-                    ),
+                    const Icon(Icons.speed, size: 48, color: Colors.blue),
                     const SizedBox(height: 12),
                     const Text(
                       'Reflex Test',
@@ -59,19 +52,13 @@ class StartScreen extends StatelessWidget {
                     const SizedBox(height: 6),
                     const Text(
                       '落ちてくる棒をタップして反応速度を測定！',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.black54,
-                      ),
+                      style: TextStyle(fontSize: 14, color: Colors.black54),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 8),
                     const Text(
                       '15秒間でできるだけ多くの棒をタップしよう',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ),
+                      style: TextStyle(fontSize: 12, color: Colors.grey),
                       textAlign: TextAlign.center,
                     ),
                   ],
@@ -186,10 +173,7 @@ class StartScreen extends StatelessWidget {
                 color: Colors.white.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Icon(
-                _getDifficultyIcon(difficulty),
-                size: 24,
-              ),
+              child: Icon(_getDifficultyIcon(difficulty), size: 24),
             ),
 
             const SizedBox(width: 16),

@@ -17,7 +17,8 @@ class OthelloAI {
     if (validMoves.isEmpty) return null;
 
     // 序盤（最初の10手まで）はランダム性を持たせる
-    final totalStones = board.countStones(Player.black) + board.countStones(Player.white);
+    final totalStones =
+        board.countStones(Player.black) + board.countStones(Player.white);
     if (totalStones <= 8) {
       // 序盤は評価値が高い手を複数から選択
       final moveScores = <Position, int>{};
@@ -90,7 +91,14 @@ class OthelloAI {
 
       for (final move in validMoves) {
         final newBoard = board.makeMove(move, currentPlayer);
-        final eval = _minimax(newBoard, depth - 1, false, aiPlayer, alpha, beta);
+        final eval = _minimax(
+          newBoard,
+          depth - 1,
+          false,
+          aiPlayer,
+          alpha,
+          beta,
+        );
 
         maxEval = max(maxEval, eval);
         alpha = max(alpha, eval);

@@ -7,9 +7,7 @@ part 'board.freezed.dart';
 
 @freezed
 class Board with _$Board {
-  const factory Board({
-    @Default([]) List<List<Player>> cells,
-  }) = _Board;
+  const factory Board({@Default([]) List<List<Player>> cells}) = _Board;
 
   const Board._();
 
@@ -23,10 +21,7 @@ class Board with _$Board {
   static const int endgameStoneWeight = 2;
 
   factory Board.initial() {
-    final cells = List.generate(
-      8,
-      (_) => List.generate(8, (_) => Player.none),
-    );
+    final cells = List.generate(8, (_) => List.generate(8, (_) => Player.none));
 
     // 初期配置
     cells[3][3] = Player.white;
@@ -189,16 +184,22 @@ class Board with _$Board {
     for (var i = 0; i < boardSize; i++) {
       // 上辺
       if (getCell(Position(row: 0, col: i)) == player) score += edgeWeight;
-      if (getCell(Position(row: 0, col: i)) == player.opponent) score -= edgeWeight;
+      if (getCell(Position(row: 0, col: i)) == player.opponent)
+        score -= edgeWeight;
       // 下辺
-      if (getCell(Position(row: boardSize - 1, col: i)) == player) score += edgeWeight;
-      if (getCell(Position(row: boardSize - 1, col: i)) == player.opponent) score -= edgeWeight;
+      if (getCell(Position(row: boardSize - 1, col: i)) == player)
+        score += edgeWeight;
+      if (getCell(Position(row: boardSize - 1, col: i)) == player.opponent)
+        score -= edgeWeight;
       // 左辺
       if (getCell(Position(row: i, col: 0)) == player) score += edgeWeight;
-      if (getCell(Position(row: i, col: 0)) == player.opponent) score -= edgeWeight;
+      if (getCell(Position(row: i, col: 0)) == player.opponent)
+        score -= edgeWeight;
       // 右辺
-      if (getCell(Position(row: i, col: boardSize - 1)) == player) score += edgeWeight;
-      if (getCell(Position(row: i, col: boardSize - 1)) == player.opponent) score -= edgeWeight;
+      if (getCell(Position(row: i, col: boardSize - 1)) == player)
+        score += edgeWeight;
+      if (getCell(Position(row: i, col: boardSize - 1)) == player.opponent)
+        score -= edgeWeight;
     }
 
     // 着手可能数の差
@@ -209,7 +210,9 @@ class Board with _$Board {
     // 石の数の差（終盤重視）
     final totalStones = countStones(Player.black) + countStones(Player.white);
     if (totalStones > endgameThreshold) {
-      score += (countStones(player) - countStones(player.opponent)) * endgameStoneWeight;
+      score +=
+          (countStones(player) - countStones(player.opponent)) *
+          endgameStoneWeight;
     }
 
     return score;

@@ -11,46 +11,41 @@ class MapDemoScreen extends HookConsumerWidget {
     final theme = Theme.of(context);
 
     // Tokyo Station coordinates
-    final initialPosition = useMemoized(
-      () => const LatLng(35.6812, 139.7671),
-    );
+    final initialPosition = useMemoized(() => const LatLng(35.6812, 139.7671));
 
     final markers = useState<Set<Marker>>({});
     final mapType = useState(MapType.normal);
 
-    useEffect(
-      () {
-        // Add sample markers
-        markers.value = {
-          Marker(
-            markerId: const MarkerId('tokyo_station'),
-            position: const LatLng(35.6812, 139.7671),
-            infoWindow: const InfoWindow(
-              title: 'Tokyo Station',
-              snippet: 'Main railway station',
-            ),
+    useEffect(() {
+      // Add sample markers
+      markers.value = {
+        Marker(
+          markerId: const MarkerId('tokyo_station'),
+          position: const LatLng(35.6812, 139.7671),
+          infoWindow: const InfoWindow(
+            title: 'Tokyo Station',
+            snippet: 'Main railway station',
           ),
-          Marker(
-            markerId: const MarkerId('tokyo_tower'),
-            position: const LatLng(35.6586, 139.7454),
-            infoWindow: const InfoWindow(
-              title: 'Tokyo Tower',
-              snippet: 'Iconic landmark',
-            ),
+        ),
+        Marker(
+          markerId: const MarkerId('tokyo_tower'),
+          position: const LatLng(35.6586, 139.7454),
+          infoWindow: const InfoWindow(
+            title: 'Tokyo Tower',
+            snippet: 'Iconic landmark',
           ),
-          Marker(
-            markerId: const MarkerId('shibuya'),
-            position: const LatLng(35.6595, 139.7004),
-            infoWindow: const InfoWindow(
-              title: 'Shibuya Crossing',
-              snippet: 'Famous intersection',
-            ),
+        ),
+        Marker(
+          markerId: const MarkerId('shibuya'),
+          position: const LatLng(35.6595, 139.7004),
+          infoWindow: const InfoWindow(
+            title: 'Shibuya Crossing',
+            snippet: 'Famous intersection',
           ),
-        };
-        return null;
-      },
-      const [],
-    );
+        ),
+      };
+      return null;
+    }, const []);
 
     return Scaffold(
       appBar: AppBar(
@@ -61,18 +56,12 @@ class MapDemoScreen extends HookConsumerWidget {
             tooltip: 'Map Type',
             onSelected: (type) => mapType.value = type,
             itemBuilder: (context) => [
-              const PopupMenuItem(
-                value: MapType.normal,
-                child: Text('Normal'),
-              ),
+              const PopupMenuItem(value: MapType.normal, child: Text('Normal')),
               const PopupMenuItem(
                 value: MapType.satellite,
                 child: Text('Satellite'),
               ),
-              const PopupMenuItem(
-                value: MapType.hybrid,
-                child: Text('Hybrid'),
-              ),
+              const PopupMenuItem(value: MapType.hybrid, child: Text('Hybrid')),
               const PopupMenuItem(
                 value: MapType.terrain,
                 child: Text('Terrain'),
@@ -105,7 +94,8 @@ class MapDemoScreen extends HookConsumerWidget {
                   position: position,
                   infoWindow: InfoWindow(
                     title: 'Custom Marker',
-                    snippet: 'Lat: ${position.latitude.toStringAsFixed(4)}, '
+                    snippet:
+                        'Lat: ${position.latitude.toStringAsFixed(4)}, '
                         'Lng: ${position.longitude.toStringAsFixed(4)}',
                   ),
                 );
@@ -119,10 +109,7 @@ class MapDemoScreen extends HookConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Map Controls',
-                  style: theme.textTheme.titleMedium,
-                ),
+                Text('Map Controls', style: theme.textTheme.titleMedium),
                 const SizedBox(height: 8),
                 Wrap(
                   spacing: 8,

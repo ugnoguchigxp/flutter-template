@@ -41,10 +41,7 @@ class AreaChartWidget extends StatelessWidget {
             color: ColorEncode(value: colorScheme.primary),
           ),
         ],
-        axes: [
-          Defaults.horizontalAxis,
-          Defaults.verticalAxis,
-        ],
+        axes: [Defaults.horizontalAxis, Defaults.verticalAxis],
       ),
     );
   }

@@ -56,14 +56,14 @@ void main() {
 
     test('currentElapsedTimeのテスト', () {
       final startTime = DateTime.now().subtract(const Duration(seconds: 2));
-      
+
       final state = GameState(
         status: GameStatus.playing,
         trialStartTime: startTime,
       );
 
       final elapsedTime = state.currentElapsedTime;
-      
+
       expect(elapsedTime, isNotNull);
       expect(elapsedTime!, greaterThan(1.9)); // 約2秒経過
       expect(elapsedTime, lessThan(2.1));

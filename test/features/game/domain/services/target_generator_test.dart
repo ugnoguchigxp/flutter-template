@@ -34,11 +34,11 @@ void main() {
       );
 
       final center = Position(x: 200, y: 200);
-      
+
       // 2つのターゲットの角度差が150°〜210°の範囲にあることを確認
       final angle1 = firstTarget.angleFrom(center);
       final angle2 = secondTarget.angleFrom(center);
-      
+
       double normalizeAngle(double angle) {
         while (angle < 0) angle += 2 * 3.14159265359;
         while (angle > 2 * 3.14159265359) angle -= 2 * 3.14159265359;
@@ -59,7 +59,7 @@ void main() {
     test('複数回生成しても常に円内に収まる', () {
       for (int i = 0; i < 10; i++) {
         final target = generator.generateTarget(canvasSize: canvasSize);
-        
+
         // 中心からの距離が円の半径内にあることを確認
         final center = Position(x: 200, y: 200);
         final distance = target.distanceTo(center);

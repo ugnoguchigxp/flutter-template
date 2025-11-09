@@ -6,8 +6,8 @@ import 'falling_bar.dart';
 part 'reflex_game_state.freezed.dart';
 
 enum ReflexGameStatus {
-  idle,     // 初期状態
-  playing,  // プレイ中
+  idle, // 初期状態
+  playing, // プレイ中
   gameOver, // ゲーム終了
 }
 
@@ -36,7 +36,7 @@ class ReflexGameState with _$ReflexGameState {
   /// 現在の出現間隔を取得
   Duration get currentSpawnInterval {
     final elapsed = elapsedSeconds;
-    
+
     if (elapsed < 5) {
       return const Duration(seconds: 2); // 0-5秒: ゆっくり
     } else if (elapsed < 10) {

@@ -27,7 +27,8 @@ class OthelloGameState with _$OthelloGameState {
   const OthelloGameState._();
 
   bool get isHumanTurn => currentPlayer == humanPlayer;
-  bool get isCpuTurn => currentPlayer != humanPlayer && currentPlayer != Player.none;
+  bool get isCpuTurn =>
+      currentPlayer != humanPlayer && currentPlayer != Player.none;
 
   int get blackCount => board.countStones(Player.black);
   int get whiteCount => board.countStones(Player.white);

@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AppThemeBundle {
-  const AppThemeBundle({
-    required this.light,
-    required this.dark,
-  });
+  const AppThemeBundle({required this.light, required this.dark});
 
   final ThemeData light;
   final ThemeData dark;
@@ -14,7 +11,6 @@ class AppThemeBundle {
 const _seedColor = Color(0xFF1E68D5);
 
 final appThemeProvider = Provider<AppThemeBundle>((ref) {
-
   final lightScheme = ColorScheme.fromSeed(
     seedColor: _seedColor,
     brightness: Brightness.light,
@@ -32,25 +28,24 @@ final appThemeProvider = Provider<AppThemeBundle>((ref) {
       visualDensity: VisualDensity.adaptivePlatformDensity,
     );
 
-    final textTheme = baseTheme.textTheme.copyWith(
-      titleLarge: baseTheme.textTheme.titleLarge?.copyWith(
-        fontWeight: FontWeight.w600,
-      ),
-      bodyLarge: baseTheme.textTheme.bodyLarge?.copyWith(fontSize: 16),
-      labelLarge: baseTheme.textTheme.labelLarge?.copyWith(letterSpacing: 0.4),
-    ).apply(
-      bodyColor: scheme.onSurface,
-      displayColor: scheme.onSurface,
-    );
+    final textTheme = baseTheme.textTheme
+        .copyWith(
+          titleLarge: baseTheme.textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
+          bodyLarge: baseTheme.textTheme.bodyLarge?.copyWith(fontSize: 16),
+          labelLarge: baseTheme.textTheme.labelLarge?.copyWith(
+            letterSpacing: 0.4,
+          ),
+        )
+        .apply(bodyColor: scheme.onSurface, displayColor: scheme.onSurface);
 
     return baseTheme.copyWith(
       textTheme: textTheme,
       scaffoldBackgroundColor: scheme.surface,
       cardTheme: CardThemeData(
         clipBehavior: Clip.antiAlias,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         elevation: 1,
         margin: const EdgeInsets.all(0),
       ),
@@ -68,15 +63,11 @@ final appThemeProvider = Provider<AppThemeBundle>((ref) {
         elevation: 0,
       ),
       inputDecorationTheme: InputDecorationTheme(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
       ),
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
     );
   }

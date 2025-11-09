@@ -28,20 +28,14 @@ class BarcodeScannerScreen extends HookConsumerWidget {
     final scannedBarcodes = useState<List<Barcode>>([]);
     final isScanning = useState(true);
 
-    useEffect(
-      () {
-        return controller.dispose;
-      },
-      [controller],
-    );
+    useEffect(() {
+      return controller.dispose;
+    }, [controller]);
 
     void handleBarcode(BarcodeCapture capture) {
       final barcodes = capture.barcodes;
       if (barcodes.isNotEmpty && isScanning.value) {
-        scannedBarcodes.value = [
-          ...barcodes,
-          ...scannedBarcodes.value,
-        ];
+        scannedBarcodes.value = [...barcodes, ...scannedBarcodes.value];
       }
     }
 
@@ -50,9 +44,7 @@ class BarcodeScannerScreen extends HookConsumerWidget {
         title: const Text('Barcode Scanner'),
         actions: [
           IconButton(
-            icon: Icon(
-              isScanning.value ? Icons.pause : Icons.play_arrow,
-            ),
+            icon: Icon(isScanning.value ? Icons.pause : Icons.play_arrow),
             tooltip: isScanning.value ? 'Pause Scanning' : 'Resume Scanning',
             onPressed: () async {
               isScanning.value = !isScanning.value;
@@ -135,10 +127,7 @@ class BarcodeScannerScreen extends HookConsumerWidget {
                     padding: const EdgeInsets.all(16),
                     child: Row(
                       children: [
-                        Icon(
-                          Icons.history,
-                          color: theme.colorScheme.primary,
-                        ),
+                        Icon(Icons.history, color: theme.colorScheme.primary),
                         const SizedBox(width: 8),
                         Text(
                           'Scanned Barcodes (${scannedBarcodes.value.length})',
@@ -204,8 +193,9 @@ class BarcodeScannerScreen extends HookConsumerWidget {
                                     tooltip: 'Copy to Clipboard',
                                     onPressed: () {
                                       // TODO: Implement clipboard copy
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
                                         const SnackBar(
                                           content: Text('Copied to clipboard'),
                                         ),

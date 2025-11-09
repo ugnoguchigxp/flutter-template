@@ -33,14 +33,18 @@ class GameStatsPanel extends ConsumerWidget {
           children: [
             // スコア
             _buildCompactStat('スコア', '${gameState.score}', Colors.white),
-            
+
             // 成功数
-            _buildCompactStat('成功', '${gameState.successCount}', Colors.blue.shade300),
-            
+            _buildCompactStat(
+              '成功',
+              '${gameState.successCount}',
+              Colors.blue.shade300,
+            ),
+
             // 残り時間
             _buildCompactStat(
-              '時間', 
-              '${gameState.remainingTime.toStringAsFixed(1)}s', 
+              '時間',
+              '${gameState.remainingTime.toStringAsFixed(1)}s',
               gameState.remainingTime <= 5 ? Colors.red.shade300 : Colors.white,
             ),
           ],
@@ -76,10 +80,7 @@ class GameStatsPanel extends ConsumerWidget {
                 children: [
                   const Text(
                     'スコア',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
-                    ),
+                    style: TextStyle(fontSize: 14, color: Colors.grey),
                   ),
                   Text(
                     '${gameState.score}',
@@ -91,17 +92,14 @@ class GameStatsPanel extends ConsumerWidget {
                   ),
                 ],
               ),
-              
+
               // 成功数
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Text(
                     '成功数',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
-                    ),
+                    style: TextStyle(fontSize: 14, color: Colors.grey),
                   ),
                   Text(
                     '${gameState.successCount}',
@@ -120,18 +118,15 @@ class GameStatsPanel extends ConsumerWidget {
                 children: [
                   const Text(
                     '残り時間',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
-                    ),
+                    style: TextStyle(fontSize: 14, color: Colors.grey),
                   ),
                   Text(
                     '${gameState.remainingTime.toStringAsFixed(1)}s',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: gameState.remainingTime <= 5 
-                          ? Colors.red 
+                      color: gameState.remainingTime <= 5
+                          ? Colors.red
                           : Colors.black87,
                     ),
                   ),
@@ -139,7 +134,7 @@ class GameStatsPanel extends ConsumerWidget {
               ),
             ],
           ),
-          
+
           // 難易度表示
           const SizedBox(height: 8),
           Container(

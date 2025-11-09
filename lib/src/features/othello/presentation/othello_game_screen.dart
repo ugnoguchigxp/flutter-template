@@ -20,9 +20,7 @@ class OthelloGameScreen extends ConsumerWidget {
         backgroundColor: Colors.green.shade700,
         foregroundColor: Colors.white,
       ),
-      body: SafeArea(
-        child: _buildContent(context, ref, gameState),
-      ),
+      body: SafeArea(child: _buildContent(context, ref, gameState)),
     );
   }
 
@@ -342,9 +340,7 @@ class _OthelloCellWidget extends StatelessWidget {
                 ? Border.all(color: Colors.yellow.shade700, width: 3)
                 : null,
           ),
-          child: Center(
-            child: _buildContent(),
-          ),
+          child: Center(child: _buildContent()),
         ),
       ),
     );
@@ -415,9 +411,13 @@ class _GameOverView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
-            isDraw ? Icons.handshake : (humanWon ? Icons.celebration : Icons.sentiment_dissatisfied),
+            isDraw
+                ? Icons.handshake
+                : (humanWon ? Icons.celebration : Icons.sentiment_dissatisfied),
             size: 100,
-            color: isDraw ? Colors.grey : (humanWon ? Colors.amber : Colors.blue),
+            color: isDraw
+                ? Colors.grey
+                : (humanWon ? Colors.amber : Colors.blue),
             semanticLabel: isDraw ? '引き分け' : (humanWon ? '勝利' : '敗北'),
           ),
           const SizedBox(height: 24),
@@ -438,7 +438,10 @@ class _GameOverView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _buildFinalScore('黒', gameState.blackCount),
-                const Text(':', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+                const Text(
+                  ':',
+                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                ),
                 _buildFinalScore('白', gameState.whiteCount),
               ],
             ),

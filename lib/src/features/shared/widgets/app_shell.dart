@@ -173,10 +173,7 @@ class _AppDrawerHeader extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Text(context.tr('app.title'), style: theme.textTheme.titleLarge),
-            Text(
-              context.tr('app.subtitle'),
-              style: theme.textTheme.bodySmall,
-            ),
+            Text(context.tr('app.subtitle'), style: theme.textTheme.bodySmall),
           ],
         ),
       ),

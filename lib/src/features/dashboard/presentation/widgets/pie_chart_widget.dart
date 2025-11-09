@@ -28,12 +28,7 @@ class PieChartWidget extends StatelessWidget {
             accessor: (Map<dynamic, dynamic> map) => map['value'] as num,
           ),
         },
-        transforms: [
-          Proportion(
-            variable: 'value',
-            as: 'percent',
-          ),
-        ],
+        transforms: [Proportion(variable: 'value', as: 'percent')],
         marks: [
           IntervalMark(
             position: Varset('percent') / Varset('segment'),

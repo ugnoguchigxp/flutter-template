@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AsyncValueWidget<T> extends StatelessWidget {
-  const AsyncValueWidget({
-    super.key,
-    required this.value,
-    required this.data,
-  });
+  const AsyncValueWidget({super.key, required this.value, required this.data});
 
   final AsyncValue<T> value;
   final Widget Function(T data) data;
@@ -38,17 +34,12 @@ class _ErrorView extends StatelessWidget {
         children: [
           Icon(Icons.error_outline, color: theme.colorScheme.error, size: 48),
           const SizedBox(height: 12),
-          Text(
-            'データの取得に失敗しました',
-            style: theme.textTheme.titleMedium,
-          ),
+          Text('データの取得に失敗しました', style: theme.textTheme.titleMedium),
           const SizedBox(height: 8),
           Text(
             '$error',
             textAlign: TextAlign.center,
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.hintColor,
-            ),
+            style: theme.textTheme.bodyMedium?.copyWith(color: theme.hintColor),
           ),
         ],
       ),

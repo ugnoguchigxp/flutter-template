@@ -7,8 +7,8 @@ const _uuid = Uuid();
 
 final customerCollectionProvider =
     NotifierProvider<CustomerCollectionNotifier, List<Customer>>(
-  CustomerCollectionNotifier.new,
-);
+      CustomerCollectionNotifier.new,
+    );
 
 class CustomerCollectionNotifier extends Notifier<List<Customer>> {
   @override

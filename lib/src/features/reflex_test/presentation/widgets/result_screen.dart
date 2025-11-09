@@ -134,13 +134,25 @@ class ResultScreen extends StatelessWidget {
 
                       _buildStatRow('成功数', '${result.successCount} 回'),
                       _buildStatRow('難易度', result.difficulty.label),
-                      _buildStatRow('平均反応速度', '${result.averageReactionTime.toStringAsFixed(0)} ms'),
-                      _buildStatRow('最速反応速度', '${result.bestReactionTime?.toStringAsFixed(0) ?? '-'} ms'),
-                      _buildStatRow('最遅反応速度', '${result.worstReactionTime?.toStringAsFixed(0) ?? '-'} ms'),
-                      _buildStatRow('成功率', '${(result.successRate * 100).toStringAsFixed(1)} %'),
+                      _buildStatRow(
+                        '平均反応速度',
+                        '${result.averageReactionTime.toStringAsFixed(0)} ms',
+                      ),
+                      _buildStatRow(
+                        '最速反応速度',
+                        '${result.bestReactionTime?.toStringAsFixed(0) ?? '-'} ms',
+                      ),
+                      _buildStatRow(
+                        '最遅反応速度',
+                        '${result.worstReactionTime?.toStringAsFixed(0) ?? '-'} ms',
+                      ),
+                      _buildStatRow(
+                        '成功率',
+                        '${(result.successRate * 100).toStringAsFixed(1)} %',
+                      ),
 
                       const SizedBox(height: 12),
-                      
+
                       // 反応時間リスト
                       if (result.reactionTimes.isNotEmpty) ...[
                         const Text(
@@ -160,9 +172,12 @@ class ResultScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final time = result.reactionTimes[index];
                                 return Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 1),
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 1,
+                                  ),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         '${index + 1}回目',
@@ -253,10 +268,7 @@ class ResultScreen extends StatelessWidget {
         children: [
           Text(
             label,
-            style: const TextStyle(
-              fontSize: 13,
-              color: Colors.black54,
-            ),
+            style: const TextStyle(fontSize: 13, color: Colors.black54),
           ),
           Text(
             value,

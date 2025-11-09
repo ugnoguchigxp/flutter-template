@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import '../../domain/models/difficulty.dart';
 
 class GameStartScreen extends StatelessWidget {
-  const GameStartScreen({
-    required this.onStart,
-    super.key,
-  });
+  const GameStartScreen({required this.onStart, super.key});
 
   final ValueChanged<Difficulty> onStart;
 
@@ -30,10 +27,7 @@ class GameStartScreen extends StatelessWidget {
             const SizedBox(height: 16),
             const Text(
               'ターゲットまで素早くドラッグしよう！',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.black54,
-              ),
+              style: TextStyle(fontSize: 16, color: Colors.black54),
             ),
             const SizedBox(height: 48),
 
@@ -66,10 +60,7 @@ class GameStartScreen extends StatelessWidget {
 }
 
 class _DifficultyButton extends StatelessWidget {
-  const _DifficultyButton({
-    required this.difficulty,
-    required this.onPressed,
-  });
+  const _DifficultyButton({required this.difficulty, required this.onPressed});
 
   final Difficulty difficulty;
   final VoidCallback onPressed;
@@ -129,10 +120,7 @@ class _DifficultyButton extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               difficulty.description,
-              style: const TextStyle(
-                fontSize: 14,
-                color: Colors.white70,
-              ),
+              style: const TextStyle(fontSize: 14, color: Colors.white70),
               textAlign: TextAlign.center,
             ),
           ],

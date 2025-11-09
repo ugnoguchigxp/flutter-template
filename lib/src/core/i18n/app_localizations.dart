@@ -16,15 +16,14 @@ class AppLocalizations {
   static const LocalizationsDelegate<AppLocalizations> delegate =
       _AppLocalizationsDelegate();
 
-  static const List<Locale> supportedLocales = [
-    Locale('en'),
-    Locale('ja'),
-  ];
+  static const List<Locale> supportedLocales = [Locale('en'), Locale('ja')];
 
   Future<void> load() async {
-    final jsonString =
-        await rootBundle.loadString('assets/locales/${locale.languageCode}.json');
-    final Map<String, dynamic> jsonMap = json.decode(jsonString) as Map<String, dynamic>;
+    final jsonString = await rootBundle.loadString(
+      'assets/locales/${locale.languageCode}.json',
+    );
+    final Map<String, dynamic> jsonMap =
+        json.decode(jsonString) as Map<String, dynamic>;
     _localizedStrings = jsonMap;
   }
 
@@ -42,7 +41,8 @@ class AppLocalizations {
   }
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override

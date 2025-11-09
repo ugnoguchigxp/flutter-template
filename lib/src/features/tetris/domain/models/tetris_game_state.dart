@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'tetromino.dart';
 
-enum TetrisGameStatus {
-  idle,
-  playing,
-  paused,
-  gameOver,
-}
+enum TetrisGameStatus { idle, playing, paused, gameOver }
 
 class TetrisGameState {
   const TetrisGameState({

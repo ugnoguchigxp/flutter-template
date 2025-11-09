@@ -30,12 +30,7 @@ class FunnelChartWidget extends StatelessWidget {
             accessor: (Map<dynamic, dynamic> map) => map['index'] as num,
           ),
         },
-        transforms: [
-          Proportion(
-            variable: 'value',
-            as: 'percent',
-          ),
-        ],
+        transforms: [Proportion(variable: 'value', as: 'percent')],
         marks: [
           IntervalMark(
             color: ColorEncode(
@@ -50,10 +45,7 @@ class FunnelChartWidget extends StatelessWidget {
             ),
           ),
         ],
-        axes: [
-          Defaults.horizontalAxis,
-          Defaults.verticalAxis,
-        ],
+        axes: [Defaults.horizontalAxis, Defaults.verticalAxis],
       ),
     );
   }

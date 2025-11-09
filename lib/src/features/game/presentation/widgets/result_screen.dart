@@ -42,10 +42,7 @@ class ResultScreen extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   '${GameConstants.totalTrials} トライアル完了',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.black54,
-                  ),
+                  style: const TextStyle(fontSize: 16, color: Colors.black54),
                 ),
               ],
             ),
@@ -162,10 +159,7 @@ class ResultScreen extends StatelessWidget {
                   ),
                   child: const Text(
                     'もう一度プレイ',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -181,10 +175,7 @@ class ResultScreen extends StatelessWidget {
                   ),
                   child: const Text(
                     '戻る',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -203,10 +194,7 @@ class ResultScreen extends StatelessWidget {
         children: [
           Text(
             label,
-            style: const TextStyle(
-              fontSize: 14,
-              color: Colors.black54,
-            ),
+            style: const TextStyle(fontSize: 14, color: Colors.black54),
           ),
           Text(
             value,
@@ -229,14 +217,18 @@ class ResultScreen extends StatelessWidget {
 
   String _calculateBestTime() {
     if (results.isEmpty) return '0.000s';
-    final best = results.map((r) => r.timeInSeconds).reduce((a, b) => a < b ? a : b);
+    final best = results
+        .map((r) => r.timeInSeconds)
+        .reduce((a, b) => a < b ? a : b);
     final bestTrial = results.firstWhere((r) => r.timeInSeconds == best);
     return '${best.toStringAsFixed(3)}s (Trial ${bestTrial.trialNumber})';
   }
 
   String _calculateWorstTime() {
     if (results.isEmpty) return '0.000s';
-    final worst = results.map((r) => r.timeInSeconds).reduce((a, b) => a > b ? a : b);
+    final worst = results
+        .map((r) => r.timeInSeconds)
+        .reduce((a, b) => a > b ? a : b);
     final worstTrial = results.firstWhere((r) => r.timeInSeconds == worst);
     return '${worst.toStringAsFixed(3)}s (Trial ${worstTrial.trialNumber})';
   }

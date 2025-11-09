@@ -57,10 +57,7 @@ class HeatmapChartWidget extends StatelessWidget {
             color: ColorEncode(value: colorScheme.tertiary),
           ),
         ],
-        axes: [
-          Defaults.horizontalAxis,
-          Defaults.verticalAxis,
-        ],
+        axes: [Defaults.horizontalAxis, Defaults.verticalAxis],
       ),
     );
   }

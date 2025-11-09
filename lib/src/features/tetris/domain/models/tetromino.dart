@@ -1,14 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum TetrominoType {
-  i,
-  o,
-  t,
-  s,
-  z,
-  j,
-  l,
-}
+enum TetrominoType { i, o, t, s, z, j, l }
 
 class Tetromino {
   const Tetromino({
@@ -50,11 +42,7 @@ class Tetromino {
     return shapes[index];
   }
 
-  Tetromino copyWith({
-    TetrominoType? type,
-    int? rotation,
-    Position? position,
-  }) {
+  Tetromino copyWith({TetrominoType? type, int? rotation, Position? position}) {
     return Tetromino(
       type: type ?? this.type,
       rotation: rotation ?? this.rotation,
@@ -192,9 +180,6 @@ class Position {
   final int y;
 
   Position copyWith({int? x, int? y}) {
-    return Position(
-      x: x ?? this.x,
-      y: y ?? this.y,
-    );
+    return Position(x: x ?? this.x, y: y ?? this.y);
   }
 }

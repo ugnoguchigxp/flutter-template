@@ -11,7 +11,10 @@ void main() {
       await localizations.load();
 
       expect(localizations.translate('app.title'), 'Nimbus Control');
-      expect(localizations.translate('dashboard.revenue_trend'), 'Revenue Trend');
+      expect(
+        localizations.translate('dashboard.revenue_trend'),
+        'Revenue Trend',
+      );
       expect(localizations.translate('api_demo.methods.get'), 'GET');
     });
 
@@ -28,10 +31,7 @@ void main() {
       await localizations.load();
 
       expect(localizations.translate('app.title'), 'Nimbus Control');
-      expect(
-        localizations.translate('dashboard.revenue_trend'),
-        '収益トレンド',
-      );
+      expect(localizations.translate('dashboard.revenue_trend'), '収益トレンド');
     });
 
     test('handles nested keys correctly', () async {
@@ -102,9 +102,7 @@ void main() {
     testWidgets('tr extension method works', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-          ],
+          localizationsDelegates: const [AppLocalizations.delegate],
           supportedLocales: AppLocalizations.supportedLocales,
           locale: const Locale('en'),
           home: Scaffold(

@@ -104,9 +104,7 @@ class TetrisGameNotifier extends StateNotifier<TetrisGameState> {
     // 落とせる最大位置まで移動
     while (true) {
       final testTetromino = state.currentTetromino!.copyWith(
-        position: state.currentTetromino!.position.copyWith(
-          y: currentY + 1,
-        ),
+        position: state.currentTetromino!.position.copyWith(y: currentY + 1),
       );
 
       if (_isValidPosition(testTetromino)) {
@@ -191,8 +189,10 @@ class TetrisGameNotifier extends StateNotifier<TetrisGameState> {
         final boardX = tetromino.position.x + x;
         final boardY = tetromino.position.y + y;
 
-        if (boardY >= 0 && boardY < boardHeight &&
-            boardX >= 0 && boardX < boardWidth) {
+        if (boardY >= 0 &&
+            boardY < boardHeight &&
+            boardX >= 0 &&
+            boardX < boardWidth) {
           newBoard[boardY][boardX] = tetromino.color;
         }
       }
@@ -318,5 +318,5 @@ class TetrisGameNotifier extends StateNotifier<TetrisGameState> {
 
 final tetrisGameProvider =
     StateNotifierProvider<TetrisGameNotifier, TetrisGameState>((ref) {
-  return TetrisGameNotifier();
-});
+      return TetrisGameNotifier();
+    });

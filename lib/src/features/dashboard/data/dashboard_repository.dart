@@ -26,16 +26,16 @@ class DashboardRepository {
       try {
         final response = await _dio.get<List<dynamic>>(
           '/analytics/revenue',
-          queryParameters: {
-            if (from != null) 'from': from.toIso8601String(),
-          },
+          queryParameters: {if (from != null) 'from': from.toIso8601String()},
         );
         final payload = response.data;
         if (payload != null && payload.isNotEmpty) {
           return payload
-              .map((entry) => RevenuePoint.fromJson(
-                    Map<String, dynamic>.from(entry as Map),
-                  ))
+              .map(
+                (entry) => RevenuePoint.fromJson(
+                  Map<String, dynamic>.from(entry as Map),
+                ),
+              )
               .toList();
         }
       } on DioException catch (error, stackTrace) {
@@ -54,10 +54,7 @@ class DashboardRepository {
     while (cursor.isBefore(now)) {
       baseline += rng.nextDouble() * 4200 - 2100;
       items.add(
-        RevenuePoint(
-          date: cursor,
-          revenue: baseline.clamp(95000, 180000),
-        ),
+        RevenuePoint(date: cursor, revenue: baseline.clamp(95000, 180000)),
       );
       cursor = cursor.add(const Duration(days: 7));
     }
@@ -71,9 +68,11 @@ class DashboardRepository {
         final payload = response.data;
         if (payload != null && payload.isNotEmpty) {
           return payload
-              .map((entry) => PipelineStage.fromJson(
-                    Map<String, dynamic>.from(entry as Map),
-                  ))
+              .map(
+                (entry) => PipelineStage.fromJson(
+                  Map<String, dynamic>.from(entry as Map),
+                ),
+              )
               .toList();
         }
       } on DioException catch (error, stackTrace) {
@@ -98,9 +97,10 @@ class DashboardRepository {
         final payload = response.data;
         if (payload != null && payload.isNotEmpty) {
           return payload
-              .map((entry) => KpiMetric.fromJson(
-                    Map<String, dynamic>.from(entry as Map),
-                  ))
+              .map(
+                (entry) =>
+                    KpiMetric.fromJson(Map<String, dynamic>.from(entry as Map)),
+              )
               .toList();
         }
       } on DioException catch (error, stackTrace) {
@@ -117,24 +117,14 @@ class DashboardRepository {
         trend: '+8.4% MoM',
         delta: 0.084,
       ),
-      KpiMetric(
-        label: 'Churn',
-        value: '1.4%',
-        trend: '-0.3pp',
-        delta: -0.003,
-      ),
+      KpiMetric(label: 'Churn', value: '1.4%', trend: '-0.3pp', delta: -0.003),
       KpiMetric(
         label: 'Active Seats',
         value: '12.4k',
         trend: '+320',
         delta: 320,
       ),
-      KpiMetric(
-        label: 'Support NPS',
-        value: '62',
-        trend: '+4.1',
-        delta: 4.1,
-      ),
+      KpiMetric(label: 'Support NPS', value: '62', trend: '+4.1', delta: 4.1),
     ];
   }
 }

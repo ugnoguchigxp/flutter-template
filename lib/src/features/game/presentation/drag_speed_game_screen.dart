@@ -55,39 +55,41 @@ class _DragSpeedGameScreenState extends ConsumerState<DragSpeedGameScreen> {
                 },
               )
             : gameState.status == GameStatus.gameComplete
-                ? ResultScreen(
-                    results: gameState.results,
-                    onPlayAgain: gameNotifier.resetGame,
-                    onBack: gameNotifier.resetGame,
-                  )
-                : Column(
-                    children: [
-                      // ゲーム情報パネル
-                      const GameInfoPanel(),
+            ? ResultScreen(
+                results: gameState.results,
+                onPlayAgain: gameNotifier.resetGame,
+                onBack: gameNotifier.resetGame,
+              )
+            : Column(
+                children: [
+                  // ゲーム情報パネル
+                  const GameInfoPanel(),
 
-                      // ゲームキャンバス
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: LayoutBuilder(
-                            builder: (context, constraints) {
-                              return AspectRatio(
-                                aspectRatio: 1.0,
-                                child: GameCanvas(
-                                  gameState: gameState,
-                                  onDragUpdate: (offset) {
-                                    final newPos =
-                                        Position(x: offset.dx, y: offset.dy);
-                                    gameNotifier.updatePlayerPosition(newPos);
-                                  },
-                                ),
-                              );
-                            },
-                          ),
-                        ),
+                  // ゲームキャンバス
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          return AspectRatio(
+                            aspectRatio: 1.0,
+                            child: GameCanvas(
+                              gameState: gameState,
+                              onDragUpdate: (offset) {
+                                final newPos = Position(
+                                  x: offset.dx,
+                                  y: offset.dy,
+                                );
+                                gameNotifier.updatePlayerPosition(newPos);
+                              },
+                            ),
+                          );
+                        },
                       ),
-                    ],
+                    ),
                   ),
+                ],
+              ),
       ),
     );
   }

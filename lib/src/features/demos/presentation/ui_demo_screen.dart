@@ -62,93 +62,101 @@ class UiDemoScreen extends HookConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
         children: [
-        Text(context.tr('ui_demo.title'), style: theme.textTheme.headlineMedium),
-        const SizedBox(height: 8),
-        Text(
-          context.tr('ui_demo.subtitle'),
-          style: theme.textTheme.bodyLarge,
-        ),
-        const SizedBox(height: 24),
-        _SectionCard(
-          title: context.tr('ui_demo.sections.data_table.title'),
-          subtitle: context.tr('ui_demo.sections.data_table.subtitle'),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxHeight: 320),
-            child: PipelineTable(stages: pipelineStages),
+          Text(
+            context.tr('ui_demo.title'),
+            style: theme.textTheme.headlineMedium,
           ),
-        ),
-        const SizedBox(height: 24),
-        _SectionCard(
-          title: context.tr('ui_demo.sections.reactive_forms.title'),
-          subtitle: context.tr('ui_demo.sections.reactive_forms.subtitle'),
-          child: ReactiveForm(
-            formGroup: form,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Wrap(
-                  spacing: 16,
-                  runSpacing: 16,
-                  children: [
-                    _ReactiveTextField(
-                      controlName: 'company',
-                      label: context.tr('ui_demo.form.company_label'),
-                    ),
-                    _ReactiveTextField(
-                      controlName: 'email',
-                      label: context.tr('ui_demo.form.email_label'),
-                      keyboardType: TextInputType.emailAddress,
-                    ),
-                    _SeatField(),
-                    _RenewalPicker(controlName: 'renewal'),
-                  ],
-                ),
-                const SizedBox(height: 24),
-                ReactiveFormConsumer(
-                  builder: (context, formGroup, child) => FilledButton.icon(
-                    icon: const Icon(Icons.visibility),
-                    label: Text(context.tr('ui_demo.form.preview')),
-                    onPressed: formGroup.valid
-                        ? () async {
-                            final values = formGroup.value;
-                            await showDialog<void>(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                title: Text(context.tr('ui_demo.form.payload_title')),
-                                content: Text(values.toString()),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.of(context).pop(),
-                                    child: Text(context.tr('common.close')),
-                                  ),
-                                ],
-                              ),
-                            );
-                          }
-                        : null,
-                  ),
-                ),
-              ],
+          const SizedBox(height: 8),
+          Text(
+            context.tr('ui_demo.subtitle'),
+            style: theme.textTheme.bodyLarge,
+          ),
+          const SizedBox(height: 24),
+          _SectionCard(
+            title: context.tr('ui_demo.sections.data_table.title'),
+            subtitle: context.tr('ui_demo.sections.data_table.subtitle'),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxHeight: 320),
+              child: PipelineTable(stages: pipelineStages),
             ),
           ),
-        ),
-        const SizedBox(height: 24),
-        _SectionCard(
-          title: 'Maps',
-          subtitle: 'Platform-specific maps (Apple Maps on iOS, Google Maps on Android)',
-          child: const MapWidget(),
-        ),
+          const SizedBox(height: 24),
+          _SectionCard(
+            title: context.tr('ui_demo.sections.reactive_forms.title'),
+            subtitle: context.tr('ui_demo.sections.reactive_forms.subtitle'),
+            child: ReactiveForm(
+              formGroup: form,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Wrap(
+                    spacing: 16,
+                    runSpacing: 16,
+                    children: [
+                      _ReactiveTextField(
+                        controlName: 'company',
+                        label: context.tr('ui_demo.form.company_label'),
+                      ),
+                      _ReactiveTextField(
+                        controlName: 'email',
+                        label: context.tr('ui_demo.form.email_label'),
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                      _SeatField(),
+                      _RenewalPicker(controlName: 'renewal'),
+                    ],
+                  ),
+                  const SizedBox(height: 24),
+                  ReactiveFormConsumer(
+                    builder: (context, formGroup, child) => FilledButton.icon(
+                      icon: const Icon(Icons.visibility),
+                      label: Text(context.tr('ui_demo.form.preview')),
+                      onPressed: formGroup.valid
+                          ? () async {
+                              final values = formGroup.value;
+                              await showDialog<void>(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: Text(
+                                    context.tr('ui_demo.form.payload_title'),
+                                  ),
+                                  content: Text(values.toString()),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.of(context).pop(),
+                                      child: Text(context.tr('common.close')),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
+                          : null,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 24),
+          _SectionCard(
+            title: 'Maps',
+            subtitle:
+                'Platform-specific maps (Apple Maps on iOS, Google Maps on Android)',
+            child: const MapWidget(),
+          ),
         ],
       ),
     );
   }
 
-  Drawer _buildDrawer(BuildContext context, WidgetRef ref, Locale currentLocale) {
+  Drawer _buildDrawer(
+    BuildContext context,
+    WidgetRef ref,
+    Locale currentLocale,
+  ) {
     return Drawer(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.zero,
-      ),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
@@ -201,11 +209,13 @@ class UiDemoScreen extends HookConsumerWidget {
             trailing: const Icon(Icons.chevron_right),
             onTap: () {
               Navigator.pop(context);
-              unawaited(Navigator.of(context).push(
-                MaterialPageRoute<void>(
-                  builder: (_) => const BarcodeScannerScreen(),
+              unawaited(
+                Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => const BarcodeScannerScreen(),
+                  ),
                 ),
-              ));
+              );
             },
           ),
           const Divider(height: 16),
@@ -228,130 +238,141 @@ class UiDemoScreen extends HookConsumerWidget {
   void _showLanguageDialog(BuildContext context, WidgetRef ref) {
     final currentLocale = ref.read(localeProvider);
 
-    unawaited(showDialog<void>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(context.tr('settings.select_language')),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            RadioListTile<String>(
-              title: Text(context.tr('languages.japanese')),
-              value: 'ja',
-              groupValue: currentLocale.languageCode,
-              onChanged: (value) {
-                if (value != null) {
-                  ref.read(localeProvider.notifier).setLocale(Locale(value));
-                  Navigator.of(context).pop();
-                }
-              },
-            ),
-            RadioListTile<String>(
-              title: Text(context.tr('languages.english')),
-              value: 'en',
-              groupValue: currentLocale.languageCode,
-              onChanged: (value) {
-                if (value != null) {
-                  ref.read(localeProvider.notifier).setLocale(Locale(value));
-                  Navigator.of(context).pop();
-                }
-              },
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text(context.tr('common.close')),
-          ),
-        ],
-      ),
-    ));
-  }
-
-  void _showLogoutDialog(BuildContext context) {
-    unawaited(showDialog<void>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(context.tr('account.logout')),
-        content: Text(context.tr('account.logout_confirm')),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text(context.tr('common.cancel')),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(context.tr('account.logout'))),
-              );
-            },
-            child: Text(
-              context.tr('common.ok'),
-              style: const TextStyle(color: Colors.red),
-            ),
-          ),
-        ],
-      ),
-    ));
-  }
-
-  void _showFullWidthModal(BuildContext context) {
-    unawaited(showDialog<void>(
-      context: context,
-      builder: (context) => Dialog(
-        insetPadding: EdgeInsets.zero,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(28),
-        ),
-        clipBehavior: Clip.antiAlias,
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.4,
-          child: Column(
+    unawaited(
+      showDialog<void>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(context.tr('settings.select_language')),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              AppBar(
-                title: const Text('Full Width Modal'),
-                leading: IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
+              RadioListTile<String>(
+                title: Text(context.tr('languages.japanese')),
+                value: 'ja',
+                groupValue: currentLocale.languageCode,
+                onChanged: (value) {
+                  if (value != null) {
+                    ref.read(localeProvider.notifier).setLocale(Locale(value));
+                    Navigator.of(context).pop();
+                  }
+                },
               ),
-              Expanded(
-                child: ListView(
-                  padding: const EdgeInsets.all(24),
-                  children: [
-                    Text(
-                      'Full Width Modal',
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'This modal has no horizontal padding and takes up the full width of the screen.',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    const SizedBox(height: 24),
-                    ...List.generate(
-                      10,
-                      (index) => Card(
-                        margin: const EdgeInsets.only(bottom: 16),
-                        child: ListTile(
-                          leading: CircleAvatar(child: Text('${index + 1}')),
-                          title: Text('Item ${index + 1}'),
-                          subtitle: const Text('This is a sample item in the full width modal'),
-                          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              RadioListTile<String>(
+                title: Text(context.tr('languages.english')),
+                value: 'en',
+                groupValue: currentLocale.languageCode,
+                onChanged: (value) {
+                  if (value != null) {
+                    ref.read(localeProvider.notifier).setLocale(Locale(value));
+                    Navigator.of(context).pop();
+                  }
+                },
               ),
             ],
           ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(context.tr('common.close')),
+            ),
+          ],
         ),
       ),
-    ));
+    );
+  }
+
+  void _showLogoutDialog(BuildContext context) {
+    unawaited(
+      showDialog<void>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(context.tr('account.logout')),
+          content: Text(context.tr('account.logout_confirm')),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(context.tr('common.cancel')),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(context.tr('account.logout'))),
+                );
+              },
+              child: Text(
+                context.tr('common.ok'),
+                style: const TextStyle(color: Colors.red),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showFullWidthModal(BuildContext context) {
+    unawaited(
+      showDialog<void>(
+        context: context,
+        builder: (context) => Dialog(
+          insetPadding: EdgeInsets.zero,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(28),
+          ),
+          clipBehavior: Clip.antiAlias,
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.4,
+            child: Column(
+              children: [
+                AppBar(
+                  title: const Text('Full Width Modal'),
+                  leading: IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ),
+                Expanded(
+                  child: ListView(
+                    padding: const EdgeInsets.all(24),
+                    children: [
+                      Text(
+                        'Full Width Modal',
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        'This modal has no horizontal padding and takes up the full width of the screen.',
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      const SizedBox(height: 24),
+                      ...List.generate(
+                        10,
+                        (index) => Card(
+                          margin: const EdgeInsets.only(bottom: 16),
+                          child: ListTile(
+                            leading: CircleAvatar(child: Text('${index + 1}')),
+                            title: Text('Item ${index + 1}'),
+                            subtitle: const Text(
+                              'This is a sample item in the full width modal',
+                            ),
+                            trailing: const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -432,8 +453,7 @@ class _ReactiveTextField extends StatelessWidget {
         keyboardType: keyboardType,
         decoration: InputDecoration(labelText: label),
         validationMessages: {
-          ValidationMessage.required: (_) =>
-              context.tr('validation.required'),
+          ValidationMessage.required: (_) => context.tr('validation.required'),
           ValidationMessage.email: (_) => context.tr('validation.email'),
         },
       ),

@@ -72,10 +72,7 @@ class _ControlButton extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            Colors.blue.shade400,
-            Colors.blue.shade700,
-          ],
+          colors: [Colors.blue.shade400, Colors.blue.shade700],
         ),
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
@@ -97,13 +94,7 @@ class _ControlButton extends StatelessWidget {
             child: SizedBox(
               width: 56,
               height: 56,
-              child: Center(
-                child: Icon(
-                  icon,
-                  color: Colors.white,
-                  size: 28,
-                ),
-              ),
+              child: Center(child: Icon(icon, color: Colors.white, size: 28)),
             ),
           ),
         ),

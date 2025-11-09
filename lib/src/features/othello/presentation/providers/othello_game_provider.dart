@@ -11,14 +11,12 @@ import '../../domain/services/othello_ai.dart';
 
 final othelloGameProvider =
     StateNotifierProvider<OthelloGameNotifier, OthelloGameState>(
-  (ref) => OthelloGameNotifier(),
-);
+      (ref) => OthelloGameNotifier(),
+    );
 
 class OthelloGameNotifier extends StateNotifier<OthelloGameState> {
   OthelloGameNotifier()
-      : super(const OthelloGameState(
-          status: GameStatus.selectingPlayer,
-        ));
+    : super(const OthelloGameState(status: GameStatus.selectingPlayer));
 
   final _ai = OthelloAI(maxDepth: 4);
   final _logger = Logger();
@@ -35,8 +33,9 @@ class OthelloGameNotifier extends StateNotifier<OthelloGameState> {
     // CPUが先攻の場合、CPUの手を実行
     if (humanPlayer == Player.white) {
       unawaited(
-        Future<void>.delayed(const Duration(milliseconds: 500))
-            .then((_) => _executeCpuMove()),
+        Future<void>.delayed(
+          const Duration(milliseconds: 500),
+        ).then((_) => _executeCpuMove()),
       );
     }
   }
@@ -50,10 +49,7 @@ class OthelloGameNotifier extends StateNotifier<OthelloGameState> {
     // 石を置く
     final newBoard = state.board.makeMove(position, state.currentPlayer);
 
-    state = state.copyWith(
-      board: newBoard,
-      lastMove: position,
-    );
+    state = state.copyWith(board: newBoard, lastMove: position);
 
     // ゲーム終了判定
     if (_checkGameOver()) return;
@@ -156,16 +152,11 @@ class OthelloGameNotifier extends StateNotifier<OthelloGameState> {
   void _endGame() {
     final winner = state.board.getWinner();
 
-    state = state.copyWith(
-      status: GameStatus.gameOver,
-      winner: winner,
-    );
+    state = state.copyWith(status: GameStatus.gameOver, winner: winner);
   }
 
   // ゲームリセット
   void resetGame() {
-    state = const OthelloGameState(
-      status: GameStatus.selectingPlayer,
-    );
+    state = const OthelloGameState(status: GameStatus.selectingPlayer);
   }
 }

@@ -50,10 +50,7 @@ class BarChartWidget extends StatelessWidget {
             ),
           ),
         ],
-        axes: [
-          Defaults.horizontalAxis,
-          Defaults.verticalAxis,
-        ],
+        axes: [Defaults.horizontalAxis, Defaults.verticalAxis],
       ),
     );
   }

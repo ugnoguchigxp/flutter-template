@@ -32,10 +32,13 @@ class _ReflexGameScreenState extends ConsumerState<ReflexGameScreen> {
   @override
   Widget build(BuildContext context) {
     final ReflexGameState gameState = ref.watch(reflexGameProvider);
-    final ReflexGameNotifier gameNotifier = ref.read(reflexGameProvider.notifier);
+    final ReflexGameNotifier gameNotifier = ref.read(
+      reflexGameProvider.notifier,
+    );
 
     // ゲーム開始処理（idle状態でpendingDifficultyがある場合）
-    if (gameState.status == ReflexGameStatus.idle && _pendingDifficulty != null) {
+    if (gameState.status == ReflexGameStatus.idle &&
+        _pendingDifficulty != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         final difficulty = _pendingDifficulty!;
         _pendingDifficulty = null;
@@ -62,34 +65,34 @@ class _ReflexGameScreenState extends ConsumerState<ReflexGameScreen> {
               },
             )
           : gameState.status == ReflexGameStatus.gameOver
-              ? ResultScreen(
-                  result: _createGameResult(gameState),
-                  onPlayAgain: gameNotifier.resetGame,
-                  onChangeDifficulty: gameNotifier.resetGame,
-                  onBack: () {
-                    gameNotifier.resetGame();
-                    context.go(GameRoute.path);
-                  },
-                )
-              : Stack(
-                  children: [
-                    // ゲームキャンバス（フルスクリーン）
-                    Positioned.fill(
-                      child: GameCanvas(
-                        gameState: gameState,
-                        onTapDown: gameNotifier.onTapDown,
-                      ),
-                    ),
-                    
-                    // コンパクトなゲーム統計パネル（上部にオーバーレイ）
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      child: GameStatsPanel(compact: true),
-                    ),
-                  ],
+          ? ResultScreen(
+              result: _createGameResult(gameState),
+              onPlayAgain: gameNotifier.resetGame,
+              onChangeDifficulty: gameNotifier.resetGame,
+              onBack: () {
+                gameNotifier.resetGame();
+                context.go(GameRoute.path);
+              },
+            )
+          : Stack(
+              children: [
+                // ゲームキャンバス（フルスクリーン）
+                Positioned.fill(
+                  child: GameCanvas(
+                    gameState: gameState,
+                    onTapDown: gameNotifier.onTapDown,
+                  ),
                 ),
+
+                // コンパクトなゲーム統計パネル（上部にオーバーレイ）
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  child: GameStatsPanel(compact: true),
+                ),
+              ],
+            ),
     );
   }
 
