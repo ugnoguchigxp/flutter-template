@@ -280,13 +280,13 @@ void main() {
 
         // MRR should be currency formatted
         expect(result[0].value, contains('\$'));
-        
+
         // Churn should be percentage
         expect(result[1].value, contains('%'));
-        
+
         // Active Seats should be in 'k' format
         expect(result[2].value, contains('k'));
-        
+
         // NPS should be numeric
         expect(result[3].value, matches(RegExp(r'^\d+$')));
       });
@@ -297,7 +297,7 @@ void main() {
         // Positive trend should have positive delta
         expect(result[0].trend, contains('+'));
         expect(result[0].delta, greaterThan(0));
-        
+
         // Negative trend should have negative delta
         expect(result[1].trend, contains('-'));
         expect(result[1].delta, lessThan(0));
@@ -312,10 +312,13 @@ void main() {
         expect(result, isA<List<RevenuePoint>>());
       });
 
-      test('handles DioException gracefully in pipeline distribution', () async {
-        final result = await repository.fetchPipelineDistribution();
-        expect(result, isA<List<PipelineStage>>());
-      });
+      test(
+        'handles DioException gracefully in pipeline distribution',
+        () async {
+          final result = await repository.fetchPipelineDistribution();
+          expect(result, isA<List<PipelineStage>>());
+        },
+      );
 
       test('handles DioException gracefully in KPIs', () async {
         final result = await repository.fetchKpis();
@@ -328,24 +331,27 @@ void main() {
         final stopwatch = Stopwatch()..start();
         await repository.fetchRevenueTrend();
         stopwatch.stop();
-        
+
         // Should complete quickly since it's stubbed data with small delay
         expect(stopwatch.elapsedMilliseconds, lessThan(1000));
       });
 
-      test('fetchPipelineDistribution completes within reasonable time', () async {
-        final stopwatch = Stopwatch()..start();
-        await repository.fetchPipelineDistribution();
-        stopwatch.stop();
-        
-        expect(stopwatch.elapsedMilliseconds, lessThan(500));
-      });
+      test(
+        'fetchPipelineDistribution completes within reasonable time',
+        () async {
+          final stopwatch = Stopwatch()..start();
+          await repository.fetchPipelineDistribution();
+          stopwatch.stop();
+
+          expect(stopwatch.elapsedMilliseconds, lessThan(500));
+        },
+      );
 
       test('fetchKpis completes within reasonable time', () async {
         final stopwatch = Stopwatch()..start();
         await repository.fetchKpis();
         stopwatch.stop();
-        
+
         expect(stopwatch.elapsedMilliseconds, lessThan(500));
       });
     });

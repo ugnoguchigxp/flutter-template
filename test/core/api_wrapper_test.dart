@@ -175,7 +175,9 @@ void main() {
           handler.resolve(
             Response<Object?>(
               requestOptions: options,
-              data: {'user': {'id': 1, 'name': 'John'}},
+              data: {
+                'user': {'id': 1, 'name': 'John'},
+              },
               statusCode: 201,
             ),
           );
@@ -235,7 +237,11 @@ void main() {
         onRequest: (options, handler) {
           expect(options.data, {'name': 'updated'});
           handler.resolve(
-            Response(requestOptions: options, data: {'id': 1, 'name': 'updated'}, statusCode: 200),
+            Response(
+              requestOptions: options,
+              data: {'id': 1, 'name': 'updated'},
+              statusCode: 200,
+            ),
           );
         },
       );
@@ -301,7 +307,11 @@ void main() {
       final dio = _dioWithBehavior(
         onRequest: (options, handler) {
           handler.resolve(
-            Response(requestOptions: options, data: {'deleted': true}, statusCode: 200),
+            Response(
+              requestOptions: options,
+              data: {'deleted': true},
+              statusCode: 200,
+            ),
           );
         },
       );
@@ -361,7 +371,7 @@ void main() {
   group('ApiResult', () {
     test('ApiSuccess properties and methods', () {
       final result = ApiResult.success('test data');
-      
+
       expect(result.isSuccess, isTrue);
       expect(result.isFailure, isFalse);
       expect(result.dataOrNull, 'test data');
@@ -371,7 +381,7 @@ void main() {
     test('ApiFailure properties and methods', () {
       final error = ApiError(message: 'Test error', code: 'test');
       final result = ApiResult.failure(error);
-      
+
       expect(result.isSuccess, isFalse);
       expect(result.isFailure, isTrue);
       expect(result.dataOrNull, isNull);
@@ -401,12 +411,12 @@ void main() {
       final result = ApiResult.success('test');
       var callbackCalled = false;
       var callbackData = '';
-      
+
       result.whenSuccess((data) {
         callbackCalled = true;
         callbackData = data;
       });
-      
+
       expect(callbackCalled, isTrue);
       expect(callbackData, 'test');
     });
@@ -415,22 +425,22 @@ void main() {
       final error = ApiError(message: 'Test error', code: 'test');
       final result = ApiResult.failure(error);
       var callbackCalled = false;
-      
+
       result.whenSuccess((data) {
         callbackCalled = true;
       });
-      
+
       expect(callbackCalled, isFalse);
     });
 
     test('ApiResult.whenFailure - success case', () {
       final result = ApiResult.success('test');
       var callbackCalled = false;
-      
+
       result.whenFailure((error) {
         callbackCalled = true;
       });
-      
+
       expect(callbackCalled, isFalse);
     });
 
@@ -439,12 +449,12 @@ void main() {
       final result = ApiResult.failure(error);
       var callbackCalled = false;
       var callbackError = '';
-      
+
       result.whenFailure((error) {
         callbackCalled = true;
         callbackError = error.message;
       });
-      
+
       expect(callbackCalled, isTrue);
       expect(callbackError, 'Test error');
     });
@@ -452,7 +462,9 @@ void main() {
     test('ApiResult equality', () {
       final result1 = ApiResult.success('test');
       final result2 = ApiResult.success('test');
-      final result3 = ApiResult.failure(ApiError(message: 'error', code: 'test'));
+      final result3 = ApiResult.failure(
+        ApiError(message: 'error', code: 'test'),
+      );
 
       // ApiResult classes don't implement equals/hashCode, so test value access instead
       expect(result1.dataOrNull, equals(result2.dataOrNull));
@@ -464,7 +476,7 @@ void main() {
       final stringResult = ApiResult.success('string');
       final intResult = ApiResult.success(42);
       final listResult = ApiResult.success([1, 2, 3]);
-      
+
       expect(stringResult.dataOrNull, isA<String>());
       expect(intResult.dataOrNull, isA<int>());
       expect(listResult.dataOrNull, isA<List>());

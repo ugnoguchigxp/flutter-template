@@ -125,14 +125,18 @@ void main() {
       });
 
       test('transitions correctly at 5 second boundary', () {
-        final startTime = DateTime.now().subtract(const Duration(seconds: 4, milliseconds: 900));
+        final startTime = DateTime.now().subtract(
+          const Duration(seconds: 4, milliseconds: 900),
+        );
         final state = ReflexGameState(gameStartTime: startTime);
 
         expect(state.currentSpawnInterval, const Duration(seconds: 2));
       });
 
       test('transitions correctly at 10 second boundary', () {
-        final startTime = DateTime.now().subtract(const Duration(seconds: 9, milliseconds: 900));
+        final startTime = DateTime.now().subtract(
+          const Duration(seconds: 9, milliseconds: 900),
+        );
         final state = ReflexGameState(gameStartTime: startTime);
 
         expect(state.currentSpawnInterval, const Duration(seconds: 1));
@@ -147,17 +151,13 @@ void main() {
       });
 
       test('calculates average of reaction times', () {
-        const state = ReflexGameState(
-          reactionTimes: [100.0, 200.0, 300.0],
-        );
+        const state = ReflexGameState(reactionTimes: [100.0, 200.0, 300.0]);
 
         expect(state.averageReactionTime, 200.0);
       });
 
       test('handles single reaction time', () {
-        const state = ReflexGameState(
-          reactionTimes: [150.0],
-        );
+        const state = ReflexGameState(reactionTimes: [150.0]);
 
         expect(state.averageReactionTime, 150.0);
       });
@@ -171,17 +171,13 @@ void main() {
       });
 
       test('returns fastest time', () {
-        const state = ReflexGameState(
-          reactionTimes: [300.0, 100.0, 200.0],
-        );
+        const state = ReflexGameState(reactionTimes: [300.0, 100.0, 200.0]);
 
         expect(state.bestReactionTime, 100.0);
       });
 
       test('handles single reaction time', () {
-        const state = ReflexGameState(
-          reactionTimes: [250.0],
-        );
+        const state = ReflexGameState(reactionTimes: [250.0]);
 
         expect(state.bestReactionTime, 250.0);
       });
@@ -195,17 +191,13 @@ void main() {
       });
 
       test('returns slowest time', () {
-        const state = ReflexGameState(
-          reactionTimes: [300.0, 100.0, 200.0],
-        );
+        const state = ReflexGameState(reactionTimes: [300.0, 100.0, 200.0]);
 
         expect(state.worstReactionTime, 300.0);
       });
 
       test('handles single reaction time', () {
-        const state = ReflexGameState(
-          reactionTimes: [250.0],
-        );
+        const state = ReflexGameState(reactionTimes: [250.0]);
 
         expect(state.worstReactionTime, 250.0);
       });
@@ -320,13 +312,9 @@ void main() {
       });
 
       test('states with different values are not equal', () {
-        final state1 = const ReflexGameState(
-          status: ReflexGameStatus.playing,
-        );
+        final state1 = const ReflexGameState(status: ReflexGameStatus.playing);
 
-        final state2 = const ReflexGameState(
-          status: ReflexGameStatus.gameOver,
-        );
+        final state2 = const ReflexGameState(status: ReflexGameStatus.gameOver);
 
         expect(state1, isNot(equals(state2)));
       });

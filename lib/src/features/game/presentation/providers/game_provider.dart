@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -41,7 +42,21 @@ class GameNotifier extends StateNotifier<GameState> {
   void updatePlayerPosition(Position newPos) {
     if (state.status != GameStatus.playing) return;
 
-    state = state.copyWith(playerPos: newPos);
+    // 前の位置からの距離を計算
+    double additionalDistance = 0.0;
+    if (state.playerPos != null) {
+      additionalDistance = state.playerPos!.distanceTo(newPos);
+    }
+
+    // 経路に追加
+    final newPath = [...state.currentPath, newPos];
+
+    state = state.copyWith(
+      playerPos: newPos,
+      currentPath: newPath,
+      currentTraveledDistance:
+          state.currentTraveledDistance + additionalDistance,
+    );
 
     // 到達判定
     _checkTargetReached();
@@ -67,11 +82,30 @@ class GameNotifier extends StateNotifier<GameState> {
     final duration = endTime.difference(state.trialStartTime!);
     final timeInSeconds = duration.inMilliseconds / 1000.0;
 
+    // 最短距離（直線距離）を計算
+    final startPos = state.currentPath.isNotEmpty
+        ? state.currentPath.first
+        : state.playerPos!;
+    final optimalDistance = startPos.distanceTo(state.targetPos!);
+
+    // 効率スコアを計算（100点満点）
+    // 効率率をべき乗して緩やかなカーブを作成
+    // 1.8乗により、100点はより厳密に、0点はより寛容に
+    // - 完璧（efficiency=1.0）で100点
+    // - 99%の効率（efficiency=0.99）で約98点
+    // - 5倍の距離（efficiency=0.2）でも約6点残る
+    final efficiency = optimalDistance / state.currentTraveledDistance;
+    final efficiencyScore =
+        (math.pow(efficiency, 1.8) * 100).clamp(0.0, 100.0);
+
     final result = TrialResult(
       trialNumber: state.currentTrial,
       timeInSeconds: timeInSeconds,
-      startPos: state.playerPos!,
+      startPos: startPos,
       targetPos: state.targetPos!,
+      traveledDistance: state.currentTraveledDistance,
+      optimalDistance: optimalDistance,
+      efficiencyScore: efficiencyScore,
     );
 
     final newResults = [...state.results, result];
@@ -111,6 +145,8 @@ class GameNotifier extends StateNotifier<GameState> {
       targetPos: newTarget,
       status: GameStatus.playing,
       trialStartTime: DateTime.now(),
+      currentPath: [], // 経路をリセット
+      currentTraveledDistance: 0.0, // 移動距離をリセット
     );
   }
 

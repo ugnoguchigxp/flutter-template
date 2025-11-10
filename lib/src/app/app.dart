@@ -22,7 +22,7 @@ class App extends HookConsumerWidget {
       restorationScopeId: 'nimbus-control-center',
       theme: theme.light,
       darkTheme: theme.dark,
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.light,
       locale: locale,
       localizationsDelegates: const [
         AppLocalizations.delegate,

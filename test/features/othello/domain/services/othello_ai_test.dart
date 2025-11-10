@@ -21,8 +21,10 @@ void main() {
 
     group('getBestMove', () {
       test('returns null when no valid moves', () {
-        final cells =
-            List.generate(8, (_) => List.generate(8, (_) => Player.black));
+        final cells = List.generate(
+          8,
+          (_) => List.generate(8, (_) => Player.black),
+        );
         final board = Board(cells: cells);
         final ai = OthelloAI();
 
@@ -33,7 +35,10 @@ void main() {
 
       test('returns only valid move when there is one', () {
         // Create a board where black has only one valid move
-        final cells = List.generate(8, (_) => List.generate(8, (_) => Player.none));
+        final cells = List.generate(
+          8,
+          (_) => List.generate(8, (_) => Player.none),
+        );
         cells[3][3] = Player.white;
         cells[3][4] = Player.black;
         cells[4][3] = Player.black;
@@ -69,7 +74,10 @@ void main() {
 
       test('chooses move that maximizes advantage', () {
         // Create a scenario where one move is clearly better
-        final cells = List.generate(8, (_) => List.generate(8, (_) => Player.none));
+        final cells = List.generate(
+          8,
+          (_) => List.generate(8, (_) => Player.none),
+        );
 
         // Setup: Black can capture many pieces in one direction
         cells[3][3] = Player.white;
@@ -93,7 +101,10 @@ void main() {
 
       test('prefers corner positions', () {
         // Create a board where AI can take a corner
-        final cells = List.generate(8, (_) => List.generate(8, (_) => Player.none));
+        final cells = List.generate(
+          8,
+          (_) => List.generate(8, (_) => Player.none),
+        );
 
         // Setup where black can take corner (0,0)
         cells[0][1] = Player.white;
@@ -177,7 +188,10 @@ void main() {
 
       test('handles board with pass situation', () {
         // Create a situation where current player must pass
-        final cells = List.generate(8, (_) => List.generate(8, (_) => Player.none));
+        final cells = List.generate(
+          8,
+          (_) => List.generate(8, (_) => Player.none),
+        );
 
         // Setup where white has no moves but black does
         cells[3][3] = Player.black;
@@ -197,7 +211,10 @@ void main() {
 
       test('AI makes winning move when available', () {
         // Create a scenario where AI can make a strong move
-        final cells = List.generate(8, (_) => List.generate(8, (_) => Player.none));
+        final cells = List.generate(
+          8,
+          (_) => List.generate(8, (_) => Player.none),
+        );
 
         // Setup a winnable position for black
         cells[3][3] = Player.white;
@@ -222,7 +239,10 @@ void main() {
 
       test('AI defends against opponent threats', () {
         // Create a board where opponent threatens to take corner
-        final cells = List.generate(8, (_) => List.generate(8, (_) => Player.none));
+        final cells = List.generate(
+          8,
+          (_) => List.generate(8, (_) => Player.none),
+        );
 
         // Setup: White threatens corner, black should defend
         cells[0][1] = Player.black;
@@ -266,7 +286,8 @@ void main() {
         }
 
         // Now we're in mid-game (>8 stones)
-        final totalStones = currentBoard.countStones(Player.black) +
+        final totalStones =
+            currentBoard.countStones(Player.black) +
             currentBoard.countStones(Player.white);
 
         // If we're past early game, test determinism
@@ -312,8 +333,10 @@ void main() {
 
     group('edge cases', () {
       test('handles empty board gracefully', () {
-        final cells =
-            List.generate(8, (_) => List.generate(8, (_) => Player.none));
+        final cells = List.generate(
+          8,
+          (_) => List.generate(8, (_) => Player.none),
+        );
         final board = Board(cells: cells);
         final ai = OthelloAI();
 
@@ -324,8 +347,10 @@ void main() {
       });
 
       test('handles full board', () {
-        final cells =
-            List.generate(8, (_) => List.generate(8, (_) => Player.black));
+        final cells = List.generate(
+          8,
+          (_) => List.generate(8, (_) => Player.black),
+        );
         final board = Board(cells: cells);
         final ai = OthelloAI();
 
@@ -335,8 +360,10 @@ void main() {
       });
 
       test('handles board with single stone', () {
-        final cells =
-            List.generate(8, (_) => List.generate(8, (_) => Player.none));
+        final cells = List.generate(
+          8,
+          (_) => List.generate(8, (_) => Player.none),
+        );
         cells[3][3] = Player.black;
 
         final board = Board(cells: cells);

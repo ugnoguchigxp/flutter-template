@@ -25,6 +25,9 @@ mixin _$GameState {
   Position? get playerPos => throw _privateConstructorUsedError;
   Position? get prevTargetPos => throw _privateConstructorUsedError;
   DateTime? get trialStartTime => throw _privateConstructorUsedError;
+  List<Position> get currentPath =>
+      throw _privateConstructorUsedError; // 現在のトライアルの移動経路
+  double get currentTraveledDistance => throw _privateConstructorUsedError;
 
   /// Create a copy of GameState
   /// with the given fields replaced by the non-null parameter values.
@@ -47,6 +50,8 @@ abstract class $GameStateCopyWith<$Res> {
     Position? playerPos,
     Position? prevTargetPos,
     DateTime? trialStartTime,
+    List<Position> currentPath,
+    double currentTraveledDistance,
   });
 
   $PositionCopyWith<$Res>? get targetPos;
@@ -77,6 +82,8 @@ class _$GameStateCopyWithImpl<$Res, $Val extends GameState>
     Object? playerPos = freezed,
     Object? prevTargetPos = freezed,
     Object? trialStartTime = freezed,
+    Object? currentPath = null,
+    Object? currentTraveledDistance = null,
   }) {
     return _then(
       _value.copyWith(
@@ -112,6 +119,14 @@ class _$GameStateCopyWithImpl<$Res, $Val extends GameState>
                 ? _value.trialStartTime
                 : trialStartTime // ignore: cast_nullable_to_non_nullable
                       as DateTime?,
+            currentPath: null == currentPath
+                ? _value.currentPath
+                : currentPath // ignore: cast_nullable_to_non_nullable
+                      as List<Position>,
+            currentTraveledDistance: null == currentTraveledDistance
+                ? _value.currentTraveledDistance
+                : currentTraveledDistance // ignore: cast_nullable_to_non_nullable
+                      as double,
           )
           as $Val,
     );
@@ -178,6 +193,8 @@ abstract class _$$GameStateImplCopyWith<$Res>
     Position? playerPos,
     Position? prevTargetPos,
     DateTime? trialStartTime,
+    List<Position> currentPath,
+    double currentTraveledDistance,
   });
 
   @override
@@ -210,6 +227,8 @@ class __$$GameStateImplCopyWithImpl<$Res>
     Object? playerPos = freezed,
     Object? prevTargetPos = freezed,
     Object? trialStartTime = freezed,
+    Object? currentPath = null,
+    Object? currentTraveledDistance = null,
   }) {
     return _then(
       _$GameStateImpl(
@@ -245,6 +264,14 @@ class __$$GameStateImplCopyWithImpl<$Res>
             ? _value.trialStartTime
             : trialStartTime // ignore: cast_nullable_to_non_nullable
                   as DateTime?,
+        currentPath: null == currentPath
+            ? _value._currentPath
+            : currentPath // ignore: cast_nullable_to_non_nullable
+                  as List<Position>,
+        currentTraveledDistance: null == currentTraveledDistance
+            ? _value.currentTraveledDistance
+            : currentTraveledDistance // ignore: cast_nullable_to_non_nullable
+                  as double,
       ),
     );
   }
@@ -262,7 +289,10 @@ class _$GameStateImpl extends _GameState {
     this.playerPos,
     this.prevTargetPos,
     this.trialStartTime,
+    final List<Position> currentPath = const [],
+    this.currentTraveledDistance = 0.0,
   }) : _results = results,
+       _currentPath = currentPath,
        super._();
 
   @override
@@ -291,10 +321,23 @@ class _$GameStateImpl extends _GameState {
   final Position? prevTargetPos;
   @override
   final DateTime? trialStartTime;
+  final List<Position> _currentPath;
+  @override
+  @JsonKey()
+  List<Position> get currentPath {
+    if (_currentPath is EqualUnmodifiableListView) return _currentPath;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_currentPath);
+  }
+
+  // 現在のトライアルの移動経路
+  @override
+  @JsonKey()
+  final double currentTraveledDistance;
 
   @override
   String toString() {
-    return 'GameState(status: $status, difficulty: $difficulty, currentTrial: $currentTrial, results: $results, targetPos: $targetPos, playerPos: $playerPos, prevTargetPos: $prevTargetPos, trialStartTime: $trialStartTime)';
+    return 'GameState(status: $status, difficulty: $difficulty, currentTrial: $currentTrial, results: $results, targetPos: $targetPos, playerPos: $playerPos, prevTargetPos: $prevTargetPos, trialStartTime: $trialStartTime, currentPath: $currentPath, currentTraveledDistance: $currentTraveledDistance)';
   }
 
   @override
@@ -315,7 +358,16 @@ class _$GameStateImpl extends _GameState {
             (identical(other.prevTargetPos, prevTargetPos) ||
                 other.prevTargetPos == prevTargetPos) &&
             (identical(other.trialStartTime, trialStartTime) ||
-                other.trialStartTime == trialStartTime));
+                other.trialStartTime == trialStartTime) &&
+            const DeepCollectionEquality().equals(
+              other._currentPath,
+              _currentPath,
+            ) &&
+            (identical(
+                  other.currentTraveledDistance,
+                  currentTraveledDistance,
+                ) ||
+                other.currentTraveledDistance == currentTraveledDistance));
   }
 
   @override
@@ -329,6 +381,8 @@ class _$GameStateImpl extends _GameState {
     playerPos,
     prevTargetPos,
     trialStartTime,
+    const DeepCollectionEquality().hash(_currentPath),
+    currentTraveledDistance,
   );
 
   /// Create a copy of GameState
@@ -350,6 +404,8 @@ abstract class _GameState extends GameState {
     final Position? playerPos,
     final Position? prevTargetPos,
     final DateTime? trialStartTime,
+    final List<Position> currentPath,
+    final double currentTraveledDistance,
   }) = _$GameStateImpl;
   const _GameState._() : super._();
 
@@ -369,6 +425,10 @@ abstract class _GameState extends GameState {
   Position? get prevTargetPos;
   @override
   DateTime? get trialStartTime;
+  @override
+  List<Position> get currentPath; // 現在のトライアルの移動経路
+  @override
+  double get currentTraveledDistance;
 
   /// Create a copy of GameState
   /// with the given fields replaced by the non-null parameter values.

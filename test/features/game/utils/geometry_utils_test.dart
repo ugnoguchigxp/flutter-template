@@ -62,8 +62,11 @@ void main() {
         const angle = 0.0;
         const distance = 10.0;
 
-        final result =
-            GeometryUtils.positionFromAngleAndDistance(center, angle, distance);
+        final result = GeometryUtils.positionFromAngleAndDistance(
+          center,
+          angle,
+          distance,
+        );
 
         expect(result.x, closeTo(10.0, 0.0001));
         expect(result.y, closeTo(0.0, 0.0001));
@@ -74,8 +77,11 @@ void main() {
         final angle = pi / 2;
         const distance = 10.0;
 
-        final result =
-            GeometryUtils.positionFromAngleAndDistance(center, angle, distance);
+        final result = GeometryUtils.positionFromAngleAndDistance(
+          center,
+          angle,
+          distance,
+        );
 
         expect(result.x, closeTo(0.0, 0.0001));
         expect(result.y, closeTo(10.0, 0.0001));
@@ -86,8 +92,11 @@ void main() {
         const angle = 0.0;
         const distance = 3.0;
 
-        final result =
-            GeometryUtils.positionFromAngleAndDistance(center, angle, distance);
+        final result = GeometryUtils.positionFromAngleAndDistance(
+          center,
+          angle,
+          distance,
+        );
 
         expect(result.x, closeTo(8.0, 0.0001));
         expect(result.y, closeTo(5.0, 0.0001));

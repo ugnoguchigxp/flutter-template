@@ -55,49 +55,67 @@ void main() {
       test('initial board has 4 valid moves for black', () {
         final board = Board.initial();
 
-        expect(board.isValidMove(const Position(row: 2, col: 3), Player.black),
-            true);
-        expect(board.isValidMove(const Position(row: 3, col: 2), Player.black),
-            true);
-        expect(board.isValidMove(const Position(row: 4, col: 5), Player.black),
-            true);
-        expect(board.isValidMove(const Position(row: 5, col: 4), Player.black),
-            true);
+        expect(
+          board.isValidMove(const Position(row: 2, col: 3), Player.black),
+          true,
+        );
+        expect(
+          board.isValidMove(const Position(row: 3, col: 2), Player.black),
+          true,
+        );
+        expect(
+          board.isValidMove(const Position(row: 4, col: 5), Player.black),
+          true,
+        );
+        expect(
+          board.isValidMove(const Position(row: 5, col: 4), Player.black),
+          true,
+        );
       });
 
       test('cannot place stone on occupied cell', () {
         final board = Board.initial();
 
-        expect(board.isValidMove(const Position(row: 3, col: 3), Player.black),
-            false);
-        expect(board.isValidMove(const Position(row: 3, col: 4), Player.black),
-            false);
+        expect(
+          board.isValidMove(const Position(row: 3, col: 3), Player.black),
+          false,
+        );
+        expect(
+          board.isValidMove(const Position(row: 3, col: 4), Player.black),
+          false,
+        );
       });
 
       test('cannot place stone on invalid position', () {
         final board = Board.initial();
 
         expect(
-            board.isValidMove(const Position(row: -1, col: 0), Player.black),
-            false);
+          board.isValidMove(const Position(row: -1, col: 0), Player.black),
+          false,
+        );
         expect(
-            board.isValidMove(const Position(row: 8, col: 0), Player.black),
-            false);
+          board.isValidMove(const Position(row: 8, col: 0), Player.black),
+          false,
+        );
       });
 
       test('cannot place Player.none', () {
         final board = Board.initial();
 
-        expect(board.isValidMove(const Position(row: 2, col: 3), Player.none),
-            false);
+        expect(
+          board.isValidMove(const Position(row: 2, col: 3), Player.none),
+          false,
+        );
       });
 
       test('move must flip at least one opponent stone', () {
         final board = Board.initial();
 
         // Position (0,0) has no opponent stones to flip
-        expect(board.isValidMove(const Position(row: 0, col: 0), Player.black),
-            false);
+        expect(
+          board.isValidMove(const Position(row: 0, col: 0), Player.black),
+          false,
+        );
       });
     });
 
@@ -135,8 +153,10 @@ void main() {
     group('makeMove', () {
       test('places stone and flips opponent stones', () {
         final board = Board.initial();
-        final newBoard =
-            board.makeMove(const Position(row: 2, col: 3), Player.black);
+        final newBoard = board.makeMove(
+          const Position(row: 2, col: 3),
+          Player.black,
+        );
 
         // New stone placed
         expect(newBoard.getCell(const Position(row: 2, col: 3)), Player.black);
@@ -151,7 +171,10 @@ void main() {
 
       test('flips stones in multiple directions', () {
         // Create a board where a move can flip in multiple directions
-        final cells = List.generate(8, (_) => List.generate(8, (_) => Player.none));
+        final cells = List.generate(
+          8,
+          (_) => List.generate(8, (_) => Player.none),
+        );
         cells[3][3] = Player.white;
         cells[3][4] = Player.white;
         cells[3][5] = Player.black;
@@ -159,8 +182,10 @@ void main() {
         cells[5][3] = Player.black;
 
         final board = Board(cells: cells);
-        final newBoard =
-            board.makeMove(const Position(row: 2, col: 3), Player.black);
+        final newBoard = board.makeMove(
+          const Position(row: 2, col: 3),
+          Player.black,
+        );
 
         // Stone placed
         expect(newBoard.getCell(const Position(row: 2, col: 3)), Player.black);
@@ -177,8 +202,10 @@ void main() {
         final board = Board.initial();
 
         // Try invalid move (occupied cell)
-        final newBoard =
-            board.makeMove(const Position(row: 3, col: 3), Player.black);
+        final newBoard = board.makeMove(
+          const Position(row: 3, col: 3),
+          Player.black,
+        );
 
         expect(newBoard, equals(board));
       });
@@ -205,16 +232,20 @@ void main() {
 
       test('updates count after move', () {
         final board = Board.initial();
-        final newBoard =
-            board.makeMove(const Position(row: 2, col: 3), Player.black);
+        final newBoard = board.makeMove(
+          const Position(row: 2, col: 3),
+          Player.black,
+        );
 
         expect(newBoard.countStones(Player.black), 4);
         expect(newBoard.countStones(Player.white), 1);
       });
 
       test('counts all stones on full board', () {
-        final cells =
-            List.generate(8, (_) => List.generate(8, (_) => Player.black));
+        final cells = List.generate(
+          8,
+          (_) => List.generate(8, (_) => Player.black),
+        );
         final board = Board(cells: cells);
 
         expect(board.countStones(Player.black), 64);
@@ -225,7 +256,10 @@ void main() {
 
     group('getWinner', () {
       test('returns black if black has more stones', () {
-        final cells = List.generate(8, (_) => List.generate(8, (_) => Player.none));
+        final cells = List.generate(
+          8,
+          (_) => List.generate(8, (_) => Player.none),
+        );
         cells[0][0] = Player.black;
         cells[0][1] = Player.black;
         cells[0][2] = Player.white;
@@ -236,7 +270,10 @@ void main() {
       });
 
       test('returns white if white has more stones', () {
-        final cells = List.generate(8, (_) => List.generate(8, (_) => Player.none));
+        final cells = List.generate(
+          8,
+          (_) => List.generate(8, (_) => Player.none),
+        );
         cells[0][0] = Player.white;
         cells[0][1] = Player.white;
         cells[0][2] = Player.black;
@@ -247,7 +284,10 @@ void main() {
       });
 
       test('returns null on tie', () {
-        final cells = List.generate(8, (_) => List.generate(8, (_) => Player.none));
+        final cells = List.generate(
+          8,
+          (_) => List.generate(8, (_) => Player.none),
+        );
         cells[0][0] = Player.black;
         cells[0][1] = Player.white;
 
@@ -258,7 +298,8 @@ void main() {
 
       test('returns null when all cells are empty', () {
         final board = Board(
-            cells: List.generate(8, (_) => List.generate(8, (_) => Player.none)));
+          cells: List.generate(8, (_) => List.generate(8, (_) => Player.none)),
+        );
 
         expect(board.getWinner(), null);
       });
@@ -273,7 +314,10 @@ void main() {
 
       test('returns true when neither player has valid moves', () {
         // Create board where no moves are possible
-        final cells = List.generate(8, (_) => List.generate(8, (_) => Player.black));
+        final cells = List.generate(
+          8,
+          (_) => List.generate(8, (_) => Player.black),
+        );
         // Fill all cells with black (no valid moves for either player)
         final board = Board(cells: cells);
 
@@ -290,8 +334,10 @@ void main() {
     group('evaluate', () {
       test('returns high positive score when player wins', () {
         // Create a winning position for black
-        final cells =
-            List.generate(8, (_) => List.generate(8, (_) => Player.black));
+        final cells = List.generate(
+          8,
+          (_) => List.generate(8, (_) => Player.black),
+        );
         final board = Board(cells: cells);
 
         final score = board.evaluate(Player.black);
@@ -301,8 +347,10 @@ void main() {
 
       test('returns high negative score when opponent wins', () {
         // Create a winning position for white
-        final cells =
-            List.generate(8, (_) => List.generate(8, (_) => Player.white));
+        final cells = List.generate(
+          8,
+          (_) => List.generate(8, (_) => Player.white),
+        );
         final board = Board(cells: cells);
 
         final score = board.evaluate(Player.black);
@@ -352,8 +400,10 @@ void main() {
         expect(blackScore.abs(), lessThan(100));
 
         // After a move, board state changes
-        final newBoard =
-            board.makeMove(const Position(row: 2, col: 3), Player.black);
+        final newBoard = board.makeMove(
+          const Position(row: 2, col: 3),
+          Player.black,
+        );
         final newBlackScore = newBoard.evaluate(Player.black);
 
         // Evaluation should produce some score (positive or negative)
@@ -394,8 +444,10 @@ void main() {
 
       test('boards with different cells are not equal', () {
         final board1 = Board.initial();
-        final board2 =
-            board1.makeMove(const Position(row: 2, col: 3), Player.black);
+        final board2 = board1.makeMove(
+          const Position(row: 2, col: 3),
+          Player.black,
+        );
 
         expect(board1, isNot(equals(board2)));
       });
@@ -404,7 +456,10 @@ void main() {
     group('copyWith', () {
       test('copyWith creates new instance with updated cells', () {
         final board = Board.initial();
-        final newCells = List.generate(8, (_) => List.generate(8, (_) => Player.none));
+        final newCells = List.generate(
+          8,
+          (_) => List.generate(8, (_) => Player.none),
+        );
 
         final updated = board.copyWith(cells: newCells);
 

@@ -180,29 +180,25 @@ void main() {
 
     group('blackCount', () {
       test('returns count of black stones on board', () {
-        final state = OthelloGameState(
-          board: Board.initial(),
-        );
+        final state = OthelloGameState(board: Board.initial());
 
         expect(state.blackCount, 2);
       });
 
       test('returns 0 when board is empty', () {
-        const state = OthelloGameState(
-          board: Board(cells: []),
-        );
+        const state = OthelloGameState(board: Board(cells: []));
 
         expect(state.blackCount, 0);
       });
 
       test('updates after move', () {
         final initialBoard = Board.initial();
-        final state = OthelloGameState(
-          board: initialBoard,
-        );
+        final state = OthelloGameState(board: initialBoard);
 
-        final newBoard =
-            initialBoard.makeMove(const Position(row: 2, col: 3), Player.black);
+        final newBoard = initialBoard.makeMove(
+          const Position(row: 2, col: 3),
+          Player.black,
+        );
         final updatedState = state.copyWith(board: newBoard);
 
         expect(updatedState.blackCount, 4);
@@ -211,29 +207,25 @@ void main() {
 
     group('whiteCount', () {
       test('returns count of white stones on board', () {
-        final state = OthelloGameState(
-          board: Board.initial(),
-        );
+        final state = OthelloGameState(board: Board.initial());
 
         expect(state.whiteCount, 2);
       });
 
       test('returns 0 when board is empty', () {
-        const state = OthelloGameState(
-          board: Board(cells: []),
-        );
+        const state = OthelloGameState(board: Board(cells: []));
 
         expect(state.whiteCount, 0);
       });
 
       test('updates after move', () {
         final initialBoard = Board.initial();
-        final state = OthelloGameState(
-          board: initialBoard,
-        );
+        final state = OthelloGameState(board: initialBoard);
 
-        final newBoard =
-            initialBoard.makeMove(const Position(row: 2, col: 3), Player.black);
+        final newBoard = initialBoard.makeMove(
+          const Position(row: 2, col: 3),
+          Player.black,
+        );
         final updatedState = state.copyWith(board: newBoard);
 
         // Black move flips white stone, so white count decreases
@@ -273,8 +265,10 @@ void main() {
       });
 
       test('returns empty list when no valid moves', () {
-        final cells =
-            List.generate(8, (_) => List.generate(8, (_) => Player.black));
+        final cells = List.generate(
+          8,
+          (_) => List.generate(8, (_) => Player.black),
+        );
         final state = OthelloGameState(
           board: Board(cells: cells),
           currentPlayer: Player.white,
@@ -320,8 +314,10 @@ void main() {
       });
 
       test('game over flow', () {
-        final cells =
-            List.generate(8, (_) => List.generate(8, (_) => Player.black));
+        final cells = List.generate(
+          8,
+          (_) => List.generate(8, (_) => Player.black),
+        );
         final state = OthelloGameState(
           status: GameStatus.playing,
           board: Board(cells: cells),

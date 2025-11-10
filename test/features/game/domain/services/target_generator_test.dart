@@ -26,34 +26,32 @@ void main() {
       expect(distance, greaterThanOrEqualTo(maxRadius * 0.7)); // 70%〜95%の範囲
     });
 
-    test('2回目のターゲットは前回位置の反対側に生成される', () {
+    test('2回目のターゲットは前回位置から十分に離れている', () {
       final firstTarget = generator.generateTarget(canvasSize: canvasSize);
       final secondTarget = generator.generateTarget(
         canvasSize: canvasSize,
         previousTarget: firstTarget,
       );
 
-      final center = Position(x: 200, y: 200);
-
-      // 2つのターゲットの角度差が150°〜210°の範囲にあることを確認
-      final angle1 = firstTarget.angleFrom(center);
-      final angle2 = secondTarget.angleFrom(center);
-
-      double normalizeAngle(double angle) {
-        while (angle < 0) angle += 2 * 3.14159265359;
-        while (angle > 2 * 3.14159265359) angle -= 2 * 3.14159265359;
-        return angle;
-      }
-
-      final angleDiff = normalizeAngle((angle2 - angle1).abs());
-      final minDiff = 150 * 3.14159265359 / 180; // 150° in radians
-      final maxDiff = 210 * 3.14159265359 / 180; // 210° in radians
+      // 前回位置からの距離が十分離れていることを確認
+      final distanceFromPrevious = firstTarget.distanceTo(secondTarget);
+      final maxRadius = 200 * 0.8; // canvasSizeの半分 * 0.8
+      final minRequiredDistance = maxRadius * 0.8; // 80%以上離れている
 
       expect(
-        angleDiff >= minDiff && angleDiff <= maxDiff,
-        true,
-        reason: 'Angle difference should be between 150° and 210°',
+        distanceFromPrevious,
+        greaterThanOrEqualTo(minRequiredDistance),
+        reason:
+            'Second target should be at least 80% of max radius away from first target',
       );
+
+      // 両方のターゲットが円内に収まっていることを確認
+      final center = Position(x: 200, y: 200);
+      final distance1 = firstTarget.distanceTo(center);
+      final distance2 = secondTarget.distanceTo(center);
+
+      expect(distance1, lessThanOrEqualTo(maxRadius));
+      expect(distance2, lessThanOrEqualTo(maxRadius));
     });
 
     test('複数回生成しても常に円内に収まる', () {

@@ -82,6 +82,23 @@ class GameInfoPanel extends HookConsumerWidget {
             ),
           ),
 
+          // 現在の移動距離（常に高さを確保）
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: SizedBox(
+              height: 19,
+              child: gameState.status == GameStatus.playing
+                  ? Text(
+                      'Distance: ${gameState.currentTraveledDistance.toStringAsFixed(1)}px',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.black54,
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+            ),
+          ),
+
           // 前回の結果（常に高さを確保）
           Padding(
             padding: const EdgeInsets.only(top: 8),
@@ -89,7 +106,8 @@ class GameInfoPanel extends HookConsumerWidget {
               height: 17, // fontSize 14の行高
               child: gameState.results.isNotEmpty
                   ? Text(
-                      'Last: ${gameState.results.last.timeInSeconds.toStringAsFixed(3)}s',
+                      'Last: ${gameState.results.last.timeInSeconds.toStringAsFixed(3)}s | '
+                      'Score: ${gameState.results.last.efficiencyScore.toStringAsFixed(1)}pts',
                       style: const TextStyle(fontSize: 14, color: Colors.grey),
                     )
                   : const SizedBox.shrink(),

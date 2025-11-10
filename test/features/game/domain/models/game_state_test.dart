@@ -26,23 +26,32 @@ void main() {
 
     test('統計計算のテスト', () {
       final results = [
-        TrialResult(
+        const TrialResult(
           trialNumber: 1,
           timeInSeconds: 0.5,
-          startPos: const Position(x: 0, y: 0),
-          targetPos: const Position(x: 100, y: 100),
+          startPos: Position(x: 0, y: 0),
+          targetPos: Position(x: 100, y: 100),
+          traveledDistance: 141.42, // 直線距離
+          optimalDistance: 141.42,
+          efficiencyScore: 100.0,
         ),
-        TrialResult(
+        const TrialResult(
           trialNumber: 2,
           timeInSeconds: 0.3,
-          startPos: const Position(x: 100, y: 100),
-          targetPos: const Position(x: 50, y: 50),
+          startPos: Position(x: 100, y: 100),
+          targetPos: Position(x: 50, y: 50),
+          traveledDistance: 70.71, // 直線距離
+          optimalDistance: 70.71,
+          efficiencyScore: 100.0,
         ),
-        TrialResult(
+        const TrialResult(
           trialNumber: 3,
           timeInSeconds: 0.7,
-          startPos: const Position(x: 50, y: 50),
-          targetPos: const Position(x: 150, y: 150),
+          startPos: Position(x: 50, y: 50),
+          targetPos: Position(x: 150, y: 150),
+          traveledDistance: 141.42, // 直線距離
+          optimalDistance: 141.42,
+          efficiencyScore: 100.0,
         ),
       ];
 
@@ -100,6 +109,62 @@ void main() {
       expect(easyState.difficulty, Difficulty.easy);
       expect(normalState.difficulty, Difficulty.normal);
       expect(hardState.difficulty, Difficulty.hard);
+    });
+
+    test('効率スコア統計のテスト', () {
+      final results = [
+        const TrialResult(
+          trialNumber: 1,
+          timeInSeconds: 0.5,
+          startPos: Position(x: 0, y: 0),
+          targetPos: Position(x: 100, y: 0),
+          traveledDistance: 100.0, // 最適距離と同じ
+          optimalDistance: 100.0,
+          efficiencyScore: 100.0,
+        ),
+        const TrialResult(
+          trialNumber: 2,
+          timeInSeconds: 0.6,
+          startPos: Position(x: 100, y: 0),
+          targetPos: Position(x: 200, y: 0),
+          traveledDistance: 150.0, // 1.5倍の距離
+          optimalDistance: 100.0,
+          efficiencyScore: 50.0,
+        ),
+        const TrialResult(
+          trialNumber: 3,
+          timeInSeconds: 0.7,
+          startPos: Position(x: 200, y: 0),
+          targetPos: Position(x: 300, y: 0),
+          traveledDistance: 200.0, // 2倍の距離
+          optimalDistance: 100.0,
+          efficiencyScore: 25.0,
+        ),
+      ];
+
+      final state = GameState(results: results);
+
+      // 平均効率スコア: (100 + 50 + 25) / 3 = 58.33...
+      expect(state.averageEfficiencyScore, closeTo(58.33, 0.01));
+
+      // 最高効率スコア
+      expect(state.bestEfficiencyScore, 100.0);
+
+      // 平均移動距離: (100 + 150 + 200) / 3 = 150
+      expect(state.averageTraveledDistance, 150.0);
+
+      // 平均効率率: ((100/100) + (100/150) + (100/200)) / 3
+      // = (1.0 + 0.667 + 0.5) / 3 = 0.722...
+      expect(state.averageEfficiency, closeTo(0.722, 0.001));
+    });
+
+    test('効率スコア統計（結果なし）のテスト', () {
+      const state = GameState();
+
+      expect(state.averageEfficiencyScore, 0.0);
+      expect(state.bestEfficiencyScore, isNull);
+      expect(state.averageTraveledDistance, 0.0);
+      expect(state.averageEfficiency, 0.0);
     });
   });
 }

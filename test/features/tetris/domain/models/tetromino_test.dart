@@ -533,7 +533,9 @@ void main() {
           position: Position(x: 5, y: 10),
         );
 
-        final updated = tetromino.copyWith(position: const Position(x: 7, y: 15));
+        final updated = tetromino.copyWith(
+          position: const Position(x: 7, y: 15),
+        );
 
         expect(updated.type, TetrominoType.t);
         expect(updated.rotation, 0);

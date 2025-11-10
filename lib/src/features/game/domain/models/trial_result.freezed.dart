@@ -21,6 +21,10 @@ mixin _$TrialResult {
   double get timeInSeconds => throw _privateConstructorUsedError;
   Position get startPos => throw _privateConstructorUsedError;
   Position get targetPos => throw _privateConstructorUsedError;
+  double get traveledDistance => throw _privateConstructorUsedError; // 実際の移動距離
+  double get optimalDistance =>
+      throw _privateConstructorUsedError; // 最短距離（直線距離）
+  double get efficiencyScore => throw _privateConstructorUsedError;
 
   /// Create a copy of TrialResult
   /// with the given fields replaced by the non-null parameter values.
@@ -41,6 +45,9 @@ abstract class $TrialResultCopyWith<$Res> {
     double timeInSeconds,
     Position startPos,
     Position targetPos,
+    double traveledDistance,
+    double optimalDistance,
+    double efficiencyScore,
   });
 
   $PositionCopyWith<$Res> get startPos;
@@ -66,6 +73,9 @@ class _$TrialResultCopyWithImpl<$Res, $Val extends TrialResult>
     Object? timeInSeconds = null,
     Object? startPos = null,
     Object? targetPos = null,
+    Object? traveledDistance = null,
+    Object? optimalDistance = null,
+    Object? efficiencyScore = null,
   }) {
     return _then(
       _value.copyWith(
@@ -85,6 +95,18 @@ class _$TrialResultCopyWithImpl<$Res, $Val extends TrialResult>
                 ? _value.targetPos
                 : targetPos // ignore: cast_nullable_to_non_nullable
                       as Position,
+            traveledDistance: null == traveledDistance
+                ? _value.traveledDistance
+                : traveledDistance // ignore: cast_nullable_to_non_nullable
+                      as double,
+            optimalDistance: null == optimalDistance
+                ? _value.optimalDistance
+                : optimalDistance // ignore: cast_nullable_to_non_nullable
+                      as double,
+            efficiencyScore: null == efficiencyScore
+                ? _value.efficiencyScore
+                : efficiencyScore // ignore: cast_nullable_to_non_nullable
+                      as double,
           )
           as $Val,
     );
@@ -125,6 +147,9 @@ abstract class _$$TrialResultImplCopyWith<$Res>
     double timeInSeconds,
     Position startPos,
     Position targetPos,
+    double traveledDistance,
+    double optimalDistance,
+    double efficiencyScore,
   });
 
   @override
@@ -151,6 +176,9 @@ class __$$TrialResultImplCopyWithImpl<$Res>
     Object? timeInSeconds = null,
     Object? startPos = null,
     Object? targetPos = null,
+    Object? traveledDistance = null,
+    Object? optimalDistance = null,
+    Object? efficiencyScore = null,
   }) {
     return _then(
       _$TrialResultImpl(
@@ -170,6 +198,18 @@ class __$$TrialResultImplCopyWithImpl<$Res>
             ? _value.targetPos
             : targetPos // ignore: cast_nullable_to_non_nullable
                   as Position,
+        traveledDistance: null == traveledDistance
+            ? _value.traveledDistance
+            : traveledDistance // ignore: cast_nullable_to_non_nullable
+                  as double,
+        optimalDistance: null == optimalDistance
+            ? _value.optimalDistance
+            : optimalDistance // ignore: cast_nullable_to_non_nullable
+                  as double,
+        efficiencyScore: null == efficiencyScore
+            ? _value.efficiencyScore
+            : efficiencyScore // ignore: cast_nullable_to_non_nullable
+                  as double,
       ),
     );
   }
@@ -177,13 +217,16 @@ class __$$TrialResultImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TrialResultImpl implements _TrialResult {
+class _$TrialResultImpl extends _TrialResult {
   const _$TrialResultImpl({
     required this.trialNumber,
     required this.timeInSeconds,
     required this.startPos,
     required this.targetPos,
-  });
+    required this.traveledDistance,
+    required this.optimalDistance,
+    required this.efficiencyScore,
+  }) : super._();
 
   @override
   final int trialNumber;
@@ -193,10 +236,18 @@ class _$TrialResultImpl implements _TrialResult {
   final Position startPos;
   @override
   final Position targetPos;
+  @override
+  final double traveledDistance;
+  // 実際の移動距離
+  @override
+  final double optimalDistance;
+  // 最短距離（直線距離）
+  @override
+  final double efficiencyScore;
 
   @override
   String toString() {
-    return 'TrialResult(trialNumber: $trialNumber, timeInSeconds: $timeInSeconds, startPos: $startPos, targetPos: $targetPos)';
+    return 'TrialResult(trialNumber: $trialNumber, timeInSeconds: $timeInSeconds, startPos: $startPos, targetPos: $targetPos, traveledDistance: $traveledDistance, optimalDistance: $optimalDistance, efficiencyScore: $efficiencyScore)';
   }
 
   @override
@@ -211,12 +262,26 @@ class _$TrialResultImpl implements _TrialResult {
             (identical(other.startPos, startPos) ||
                 other.startPos == startPos) &&
             (identical(other.targetPos, targetPos) ||
-                other.targetPos == targetPos));
+                other.targetPos == targetPos) &&
+            (identical(other.traveledDistance, traveledDistance) ||
+                other.traveledDistance == traveledDistance) &&
+            (identical(other.optimalDistance, optimalDistance) ||
+                other.optimalDistance == optimalDistance) &&
+            (identical(other.efficiencyScore, efficiencyScore) ||
+                other.efficiencyScore == efficiencyScore));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, trialNumber, timeInSeconds, startPos, targetPos);
+  int get hashCode => Object.hash(
+    runtimeType,
+    trialNumber,
+    timeInSeconds,
+    startPos,
+    targetPos,
+    traveledDistance,
+    optimalDistance,
+    efficiencyScore,
+  );
 
   /// Create a copy of TrialResult
   /// with the given fields replaced by the non-null parameter values.
@@ -227,13 +292,17 @@ class _$TrialResultImpl implements _TrialResult {
       __$$TrialResultImplCopyWithImpl<_$TrialResultImpl>(this, _$identity);
 }
 
-abstract class _TrialResult implements TrialResult {
+abstract class _TrialResult extends TrialResult {
   const factory _TrialResult({
     required final int trialNumber,
     required final double timeInSeconds,
     required final Position startPos,
     required final Position targetPos,
+    required final double traveledDistance,
+    required final double optimalDistance,
+    required final double efficiencyScore,
   }) = _$TrialResultImpl;
+  const _TrialResult._() : super._();
 
   @override
   int get trialNumber;
@@ -243,6 +312,12 @@ abstract class _TrialResult implements TrialResult {
   Position get startPos;
   @override
   Position get targetPos;
+  @override
+  double get traveledDistance; // 実際の移動距離
+  @override
+  double get optimalDistance; // 最短距離（直線距離）
+  @override
+  double get efficiencyScore;
 
   /// Create a copy of TrialResult
   /// with the given fields replaced by the non-null parameter values.

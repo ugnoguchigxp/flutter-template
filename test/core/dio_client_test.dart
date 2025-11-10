@@ -100,10 +100,7 @@ void main() {
 
       final dio = container.read(dioProvider);
 
-      expect(
-        dio.interceptors.any((i) => i is InterceptorsWrapper),
-        isTrue,
-      );
+      expect(dio.interceptors.any((i) => i is InterceptorsWrapper), isTrue);
     });
 
     test('retry interceptor has correct configuration', () {
@@ -178,7 +175,7 @@ void main() {
       addTearDown(container.dispose);
 
       final dio = container.read(dioProvider);
-      
+
       // Should have at least 2 interceptors: retry and logging
       expect(dio.interceptors.length, greaterThanOrEqualTo(2));
 

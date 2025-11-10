@@ -78,7 +78,10 @@ void main() {
       });
 
       test('returns localized message for validation_error', () {
-        final error = ApiError(message: 'Validation error', code: 'validation_error');
+        final error = ApiError(
+          message: 'Validation error',
+          code: 'validation_error',
+        );
         expect(error.userMessage, '入力内容を確認してください。');
       });
 
