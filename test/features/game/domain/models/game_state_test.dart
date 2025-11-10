@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../../../lib/src/features/game/domain/models/game_state.dart';
-import '../../../../../lib/src/features/game/domain/models/position.dart';
-import '../../../../../lib/src/features/game/domain/models/trial_result.dart';
-import '../../../../../lib/src/features/game/domain/models/difficulty.dart';
+import 'package:flutter_template/src/features/game/domain/models/game_state.dart';
+import 'package:flutter_template/src/features/game/domain/models/position.dart';
+import 'package:flutter_template/src/features/game/domain/models/trial_result.dart';
+import 'package:flutter_template/src/features/game/domain/models/difficulty.dart';
 
 void main() {
   group('GameState', () {

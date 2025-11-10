@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../../../lib/src/features/game/domain/models/difficulty.dart';
+import 'package:flutter_template/src/features/game/domain/models/difficulty.dart';
 
 void main() {
   group('Difficulty', () {

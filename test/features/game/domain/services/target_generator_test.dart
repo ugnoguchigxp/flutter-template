@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../../../lib/src/features/game/domain/models/position.dart';
-import '../../../../../lib/src/features/game/domain/services/target_generator.dart';
+import 'package:flutter_template/src/features/game/domain/models/position.dart';
+import 'package:flutter_template/src/features/game/domain/services/target_generator.dart';
 
 void main() {
   group('TargetGenerator', () {

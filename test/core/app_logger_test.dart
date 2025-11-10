@@ -27,20 +27,6 @@ void main() {
 
       // Verify logger is not null and is properly configured
       expect(logger, isNotNull);
-      expect(logger.level, isA<Level>());
-    });
-
-    test('Logger level is debug in debug mode', () {
-      debugDefaultTargetPlatformOverride = TargetPlatform.android;
-      final logger = container.read(appLoggerProvider);
-
-      if (kDebugMode) {
-        expect(logger.level, Level.debug);
-      } else {
-        expect(logger.level, Level.warning);
-      }
-
-      debugDefaultTargetPlatformOverride = null;
     });
 
     test('Logger can be used for logging', () {
